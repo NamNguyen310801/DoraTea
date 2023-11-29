@@ -1,0 +1,100 @@
+import { Layout } from "antd";
+import AdminContent from "./AdminContent/AdminContent";
+import AdminPage from "./AdminPage/AdminPage";
+import AdminHeader from "./AdminHeader/AdminHeader";
+import * as UserService from "../../service/user.api";
+import * as ProductService from "../../service/product.api";
+import { useEffect } from "react";
+import { setUserList } from "../../redux/slice/user.slice";
+import { useDispatch, useSelector } from "react-redux";
+import { setErrAlert, setNullAlert } from "../../redux/slice/alert.slice";
+import { setProductList } from "../../redux/slice/product.slice";
+import { getAllOrderAPI, getRecentOrderAPI } from "../../service/order.api";
+import {
+  setAllOrderList,
+  setRecentOrderList,
+} from "../../redux/slice/order.slice";
+
+export default function Admin() {
+  const dispatch = useDispatch();
+  const userList = useSelector((state) => state.user.userList);
+  const productList = useSelector((state) => state.product.productList);
+  const allOrderList = useSelector((state) => state.order.allOrderList);
+  const user = useSelector((state) => state.user.user);
+  const recentOrderList = useSelector((state) => state.order.recentOrderList);
+
+  useEffect(() => {
+    if (!userList) {
+      handleGetAllUser();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!productList) {
+      handleGetAllProduct();
+    }
+  }, []);
+
+  useEffect(() => {
+    handleGetAllOrderList();
+  }, [allOrderList]);
+
+  useEffect(() => {
+    handleGetRecentOrder();
+  }, [recentOrderList]);
+  // Lay danh sach
+  const handleGetAllUser = async () => {
+    const res = await UserService.getAllUser();
+    if (res.status === "OK") {
+      dispatch(setUserList(res.data));
+    } else {
+      setErrAlert(res.message);
+      setTimeout(() => {
+        setNullAlert();
+      }, 2000);
+    }
+  };
+  const handleGetAllProduct = async () => {
+    const res = await ProductService.getAllProduct();
+    if (res.status === "OK") {
+      dispatch(setProductList(res.data));
+    } else {
+      setErrAlert(res.message);
+      setTimeout(() => {
+        setNullAlert();
+      }, 2000);
+    }
+  };
+  // Lay danh sach don hang
+  const handleGetAllOrderList = async () => {
+    const res = await getAllOrderAPI(user?.access_token);
+    if (res.status === "OK") {
+      dispatch(setAllOrderList(res.data));
+    } else {
+      console.log(res.message);
+    }
+  };
+  //
+  const handleGetRecentOrder = async () => {
+    const res = await getRecentOrderAPI(user?.access_token);
+    if (res.status === "OK") {
+      dispatch(setRecentOrderList(res.data));
+    } else {
+      setErrAlert(res.message);
+      setTimeout(() => {
+        setNullAlert();
+      }, 2000);
+    }
+  };
+  return (
+    <>
+      <Layout>
+        <AdminPage />
+        <Layout className="bg-lightOverlay ">
+          <AdminHeader />
+          <AdminContent />
+        </Layout>
+      </Layout>
+    </>
+  );
+}

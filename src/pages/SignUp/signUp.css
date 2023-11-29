@@ -1,0 +1,13 @@
+.ant-form-item-required {
+  font-size: 16px !important;
+}
+.ant-input {
+  padding: 4px 11px !important;
+}
+.ant-row.ant-form-item-row {
+  display: flex;
+  justify-content: center;
+}
+.ant-form-item-label > label {
+  margin-top: 5px;
+}
