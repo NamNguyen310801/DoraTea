@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { isJsonString } from "./utils/function";
 import jwt_decode from "jwt-decode";
-import { setUser } from "./redux/slice/user.slice";
+import { resetUser, setUser } from "./redux/slice/user.slice";
 import {
   setAllCategory,
   setCategoryList,
@@ -179,8 +179,16 @@ function App() {
   };
   const handleGetDetailsUser = async (id, token) => {
     setIsLoading(true);
+    let storageRefreshToken = localStorage.getItem("refresh_token");
+    const refreshToken = JSON.parse(storageRefreshToken);
     const res = await UserService.getDetailUser(id, token);
-    dispatch(setUser({ ...res?.data, access_token: token }));
+    dispatch(
+      setUser({
+        ...res?.data,
+        access_token: token,
+        refresh_token: refreshToken,
+      })
+    );
     setIsLoading(false);
   };
 
@@ -189,9 +197,16 @@ function App() {
     async (config) => {
       const currentTime = new Date();
       const { decoded } = handleDecoded();
+      let storageRefreshToken = localStorage.getItem("refresh_token");
+      const refreshToken = JSON.parse(storageRefreshToken);
+      const decodedRefreshToken = jwt_decode(refreshToken);
       if (decoded?.exp < currentTime.getTime() / 1000) {
-        const data = await UserService.refreshToken();
-        config.headers["token"] = `Bearer ${data?.access_token}`;
+        if (decodedRefreshToken?.exp > currentTime.getTime() / 1000) {
+          const data = await UserService.refreshToken(refreshToken);
+          config.headers["token"] = `Bearer ${data?.access_token}`;
+        } else {
+          dispatch(resetUser());
+        }
       }
       return config;
     },

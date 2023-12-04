@@ -70,10 +70,16 @@ export default function Login() {
   };
 
   const handleGetDetailsUser = async (id, token) => {
-    // const storage = localStorage.getItem("refresh_token");
-    // const refreshToken = JSON.parse(storage);
+    const storage = localStorage.getItem("refresh_token");
+    const refreshToken = JSON.parse(storage);
     const res = await UserService.getDetailUser(id, token);
-    dispatch(setUser({ ...res?.data, access_token: token }));
+    dispatch(
+      setUser({
+        ...res?.data,
+        access_token: token,
+        refresh_token: refreshToken,
+      })
+    );
   };
 
   return (

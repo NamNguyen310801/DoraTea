@@ -98,11 +98,17 @@ export const deleteManyUser = async (data, access_token) => {
     return error;
   }
 };
-export const refreshToken = async () => {
+export const refreshToken = async (refToken) => {
   try {
-    const res = await axios.post(`${refreshTokenURL}`, {
-      withCredentials: true,
-    });
+    const res = await axios.post(
+      `${refreshTokenURL}`,
+      {},
+      {
+        headers: {
+          token: `Bearer ${refToken}`,
+        },
+      }
+    );
     return res.data;
   } catch (error) {
     return error;
