@@ -23,7 +23,7 @@ export default function AdminHome() {
         <TransactionChart />
         <BuyerProfilePieChart />
       </div>
-      <div className="flex flex-row gap-4 w-full">
+      <div className="flex flex-row gap-4 w-full h-[430px]">
         <RecentOrders />
         <PopularProducts />
       </div>

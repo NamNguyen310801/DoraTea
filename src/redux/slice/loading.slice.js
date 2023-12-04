@@ -3,6 +3,7 @@ const initialState = {
   loadingPopular: false,
   loadingSale: false,
   showOrder: false,
+  textSearch: "",
 };
 
 const loadingSlice = createSlice({
@@ -18,9 +19,16 @@ const loadingSlice = createSlice({
     setShowOrder: (state, action) => {
       state.showOrder = action.payload;
     },
+    setTextSearch: (state, action) => {
+      state.textSearch = action.payload;
+    },
   },
 });
 
-export const { setLoadingSale, setLoadingPopular, setShowOrder } =
-  loadingSlice.actions;
+export const {
+  setLoadingSale,
+  setLoadingPopular,
+  setShowOrder,
+  setTextSearch,
+} = loadingSlice.actions;
 export default loadingSlice.reducer;

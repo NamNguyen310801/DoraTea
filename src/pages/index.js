@@ -11,4 +11,6 @@ export { default as Menu } from "./Menu/Menu";
 export { default as User } from "./User/User";
 export { default as SignUp } from "./SignUp/SignUp";
 export { default as Checkout } from "./Checkout/Checkout";
-export { default as Service } from "./Service/Service";
+export { default as News } from "./News/News";
+export { default as ForgetPassword } from "./ForgetPassword/ForgetPassword";
+export { default as ProductDetail } from "./ProductDetail/ProductDetail";

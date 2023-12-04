@@ -12,9 +12,11 @@ import {
   setSuccessAlert,
 } from "../../../redux/slice/alert.slice";
 import { CartIcon } from "../../../components";
+import { setTextSearch } from "../../../redux/slice/loading.slice";
 
 export default function MenuHeader() {
   const user = useSelector((state) => state.user.user);
+  const textSearch = useSelector((state) => state.loading.textSearch);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   //log out
@@ -44,6 +46,8 @@ export default function MenuHeader() {
         <input
           type="text"
           placeholder="Search..."
+          value={textSearch}
+          onChange={(e) => dispatch(setTextSearch(e.target.value))}
           className="text-sm outline-none border border-gray-300 w-[24rem] h-10 pl-11 pr-4 rounded-full"
         />
       </div>

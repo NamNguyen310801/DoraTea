@@ -14,6 +14,7 @@ export default function MenuSlider() {
   const dispatch = useDispatch();
   const popularList = useSelector((state) => state.product.popularList);
   const discountList = useSelector((state) => state.product.discountList);
+  const textSearch = useSelector((state) => state.loading.textSearch);
 
   useEffect(() => {
     if (!popularList) {
@@ -39,7 +40,6 @@ export default function MenuSlider() {
       dispatch(setDiscountList(res.data));
     }
   };
-
   return (
     <section className="w-full pb-4 flex flex-col">
       <div className="w-full flex items-start justify-start flex-col ">
@@ -51,7 +51,13 @@ export default function MenuSlider() {
             <div className="h-1 w-40 rounded-md bg-orange-500"></div>
           </div>
         </div>
-        <Slider productList={popularList} />
+        <Slider
+          productList={
+            textSearch
+              ? popularList?.filter((item) => item?.name?.includes(textSearch))
+              : popularList
+          }
+        />
       </div>
       <div className="w-full flex items-start justify-start flex-col ">
         <div className="w-full flex items-center justify-between">
@@ -62,7 +68,13 @@ export default function MenuSlider() {
             <div className="h-1 w-40 rounded-md bg-orange-500"></div>
           </div>
         </div>
-        <Slider productList={discountList} />
+        <Slider
+          productList={
+            textSearch
+              ? discountList?.filter((item) => item?.name?.includes(textSearch))
+              : discountList
+          }
+        />
       </div>
     </section>
   );

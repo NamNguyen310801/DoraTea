@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   BarChart,
@@ -10,133 +10,77 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { getOrdersByMonthAPI } from "../../../../service/order.api";
-import * as OrderMonthSlice from "../../../../redux/slice/orderMonth.slice";
+import { getOrdersMonthCountAPI } from "../../../../service/order.api";
+import { setOrderCountList } from "../../../../redux/slice/orderMonth.slice";
 export default function TransactionChart() {
-  const user = useSelector((state) => state.user.user);
-  const order1 = useSelector((state) => state.order.order1);
-  const order2 = useSelector((state) => state.order.order2);
-  const order3 = useSelector((state) => state.order.order3);
-  const order4 = useSelector((state) => state.order.order4);
-  const order5 = useSelector((state) => state.order.order5);
-  const order6 = useSelector((state) => state.order.order6);
-  const order7 = useSelector((state) => state.order.order7);
-  const order8 = useSelector((state) => state.order.order8);
-  const order9 = useSelector((state) => state.order.order9);
-  const order10 = useSelector((state) => state.order.order10);
-  const order11 = useSelector((state) => state.order.order11);
-  const order12 = useSelector((state) => state.order.order12);
-
   const dispatch = useDispatch();
-  useEffect(() => {
-    handleGetOrder(1, OrderMonthSlice.setOrderMonth1);
-    handleGetOrder(2, OrderMonthSlice.setOrderMonth2);
-    handleGetOrder(3, OrderMonthSlice.setOrderMonth3);
-    handleGetOrder(4, OrderMonthSlice.setOrderMonth4);
-    handleGetOrder(5, OrderMonthSlice.setOrderMonth5);
-    handleGetOrder(6, OrderMonthSlice.setOrderMonth6);
-    handleGetOrder(7, OrderMonthSlice.setOrderMonth7);
-    handleGetOrder(8, OrderMonthSlice.setOrderMonth8);
-    handleGetOrder(9, OrderMonthSlice.setOrderMonth9);
-    handleGetOrder(10, OrderMonthSlice.setOrderMonth10);
-    handleGetOrder(11, OrderMonthSlice.setOrderMonth11);
-    handleGetOrder(12, OrderMonthSlice.setOrderMonth12);
-  }, [
-    order1,
-    order2,
-    order3,
-    order4,
-    order5,
-    order6,
-    order7,
-    order8,
-    order9,
-    order10,
-    order11,
-    order12,
-  ]);
+  const orderMonthCountList = useSelector(
+    (state) => state.orderMonth.orderMonthCountList
+  );
 
-  const currentYear = new Date().getFullYear();
-  // Lay danh sach don hang theo thang
-  // const handleGetOrderByMonth = async () => {
-  //   monthList.map(async (month) => {
-  //     const res = await getOrdersByMonthAPI(
-  //       user?.access_token,
-  //       currentYear,
-  //       month.value
-  //     );
-  //     if (res.status === "OK") {
-  //       const orderMonth = { name: month?.name, amount: res?.data };
-  //       setOrderMonthList((prev) => [...prev, orderMonth]);
-  //     } else {
-  //       console.log(res.message);
-  //     }
-  //   });
-  // };
-  const handleGetOrder = async (month, setOrderMonth) => {
-    const res = await getOrdersByMonthAPI(
-      user?.access_token,
-      currentYear,
-      month
-    );
+  // const currentYear = new Date().getFullYear();
+  useEffect(() => {
+    if (orderMonthCountList?.length === 0) handleGetOrder();
+  }, [orderMonthCountList]);
+
+  const handleGetOrder = async () => {
+    const res = await getOrdersMonthCountAPI();
     if (res.status === "OK") {
-      dispatch(setOrderMonth(res?.data));
+      dispatch(setOrderCountList(res?.data));
     } else {
       console.log(res.message);
     }
   };
-
   const data = [
     {
-      name: "Jan",
-      amount: order1?.length,
+      name: "Tháng 1",
+      amount: orderMonthCountList?.data[1] || 0,
     },
     {
-      name: "Feb",
-      amount: order2?.length,
+      name: "Tháng 2",
+      amount: orderMonthCountList?.data[2] || 0,
     },
     {
-      name: "Mar",
-      amount: order3?.length,
+      name: "Tháng 3",
+      amount: orderMonthCountList?.data[3] || 0,
     },
     {
-      name: "Apr",
-      amount: order4?.length,
+      name: "Tháng 4",
+      amount: orderMonthCountList?.data[4] || 0,
     },
     {
-      name: "May",
-      amount: order5?.length,
+      name: "Tháng 5",
+      amount: orderMonthCountList?.data[5] || 0,
     },
     {
-      name: "Jun",
-      amount: order6?.length,
+      name: "Tháng 6",
+      amount: orderMonthCountList?.data[6] || 0,
     },
     {
-      name: "July",
-      amount: order7?.length,
+      name: "Tháng 7",
+      amount: orderMonthCountList?.data[7] || 0,
     },
     {
-      name: "Aug",
-      amount: order8?.length,
+      name: "Tháng 8",
+      amount: orderMonthCountList?.data[8] || 0,
     },
     {
-      name: "Sep",
-      amount: order9?.length,
+      name: "Tháng 9",
+      amount: orderMonthCountList?.data[9] || 0,
     },
     {
-      name: "Oct",
-      amount: order10?.length,
+      name: "Tháng 10",
+      amount: orderMonthCountList?.data[10] || 0,
     },
     {
-      name: "Nov",
-      amount: order11?.length,
+      name: "Tháng 11",
+      amount: orderMonthCountList?.data[11] || 0,
     },
     {
-      name: "Dec",
-      amount: order12?.length,
+      name: "Tháng 12",
+      amount: orderMonthCountList?.data[12] || 0,
     },
   ];
-  console.log(data);
   return (
     <div className="h-full bg-white p-4 rounded-sm border border-gray-200 flex flex-col flex-1">
       <strong className="text-gray-700 font-medium">Thống kê giao dịch</strong>
@@ -157,7 +101,7 @@ export default function TransactionChart() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="amount" fill="#ea580c" />
+            <Bar dataKey="Số lượng" fill="#A2B5CD" />
           </BarChart>
         </ResponsiveContainer>
       </div>

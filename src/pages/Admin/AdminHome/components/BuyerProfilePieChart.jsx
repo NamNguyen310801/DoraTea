@@ -78,7 +78,7 @@ export default function BuyerProfilePieChart() {
     );
   };
   return (
-    <div className="w-[20%] h-full bg-white p-4 rounded-sm border border-gray-200 flex flex-col">
+    <div className="w-[20%] h-full min-h-[350px] bg-white p-4 rounded-sm border border-gray-200 flex flex-col">
       <strong className="text-gray-700 font-medium">Tình trạng đơn hàng</strong>
       <div className="mt-3 w-full flex-1 text-xs">
         <ResponsiveContainer width="100%" height="100%">

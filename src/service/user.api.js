@@ -2,13 +2,16 @@ import axios from "axios";
 import {
   deleteManyUserURL,
   deleteUserURL,
+  forgetPasswordURL,
   getAllURL,
   getDetailURL,
   login,
   logout,
   refreshTokenURL,
+  resetPasswordURL,
   signUp,
   updateUserURL,
+  verifyOtpURL,
 } from "./routers";
 export const axiosJWT = axios.create();
 
@@ -100,6 +103,30 @@ export const refreshToken = async () => {
     const res = await axios.post(`${refreshTokenURL}`, {
       withCredentials: true,
     });
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
+export const forgetPasswordAPI = async (data) => {
+  try {
+    const res = await axios.post(`${forgetPasswordURL}`, data);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
+export const verifyOtpAPI = async (data) => {
+  try {
+    const res = await axios.post(`${verifyOtpURL}`, data);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
+export const resetPasswordAPI = async (data) => {
+  try {
+    const res = await axios.post(`${resetPasswordURL}`, data);
     return res.data;
   } catch (error) {
     return error;

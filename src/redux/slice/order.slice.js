@@ -30,9 +30,6 @@ const orderSlice = createSlice({
     addToOrderItems: (state, action) => {
       state.orderItems.push(action.payload);
     },
-    addToOrderList: (state, action) => {
-      state.orderList.push(action.payload);
-    },
     setFullName: (state, action) => {
       state.fullName = action.payload;
     },
@@ -112,6 +109,11 @@ const orderSlice = createSlice({
     setOrderList: (state, action) => {
       state.orderList = action.payload;
     },
+    addToOrderList: (state, action) => {
+      state.orderList
+        .push(action.payload)
+        .sort((a, b) => b.createdAt - a.createdAt);
+    },
     updateOrderItem: (state, action) => {
       const orderEdit = action.payload;
       state.orderList?.find((order, index) => {
@@ -124,6 +126,11 @@ const orderSlice = createSlice({
     },
     setAllOrderList: (state, action) => {
       state.allOrderList = action.payload;
+    },
+    addToAllOrderList: (state, action) => {
+      state.allOrderList
+        .push(action.payload)
+        .sort((a, b) => b.createdAt - a.createdAt);
     },
     updateAllOrderList: (state, action) => {
       const orderEdit = action.payload;
@@ -171,5 +178,6 @@ export const {
   setOrderId,
   setOrderCheckout,
   setRecentOrderList,
+  addToAllOrderList,
 } = orderSlice.actions;
 export default orderSlice.reducer;

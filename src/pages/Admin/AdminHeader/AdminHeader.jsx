@@ -30,6 +30,7 @@ export default function AdminHeader() {
     setTimeout(() => {
       dispatch(resetUser());
       dispatch(setNullAlert());
+      navigate("/");
     }, 500);
   };
   return (

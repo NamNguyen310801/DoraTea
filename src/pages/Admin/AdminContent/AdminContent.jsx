@@ -10,6 +10,7 @@ export default function AdminContent() {
   return (
     <Content className="">
       <Routes>
+        <Route path="/" element={<AdminHome />} />
         <Route path="/home" element={<AdminHome />} />
         <Route path="/product" element={<ProductList />} />
         <Route path="/newProduct" element={<NewProduct />} />

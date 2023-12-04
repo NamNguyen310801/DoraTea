@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoFastFood } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import { SliderCard } from "../../../components";
@@ -6,7 +6,17 @@ import { SliderCard } from "../../../components";
 export default function MenuCategory() {
   const categoryList = useSelector((state) => state.category.categoryList);
   const productList = useSelector((state) => state.product.productList);
+  const textSearch = useSelector((state) => state.loading.textSearch);
   const [filter, setFilter] = useState("");
+  // const [data, setData] = useState([]);
+  // useEffect(() => {
+  //   if (textSearch) {
+  //     setData(productList?.filter((item) => item?.name?.includes(textSearch)));
+  //   } else {
+  //     setData(productList);
+  //   }
+  // }, [textSearch, productList]);
+
   return (
     <section className="w-full my-6" id="menu">
       <div className="w-full flex flex-col items-center justify-center">
@@ -49,6 +59,7 @@ export default function MenuCategory() {
           <div className="w-full flex items-center gap-x-4 gap-y-6 mb-12 scroll-smooth overflow-x-hidden flex-wrap">
             {filter
               ? productList
+                  ?.filter((item) => item?.name?.includes(textSearch))
                   ?.filter((product) => product.category === filter)
                   ?.map((product, index) => (
                     <div
@@ -57,13 +68,15 @@ export default function MenuCategory() {
                       <SliderCard key={index} data={product} index={index} />
                     </div>
                   ))
-              : productList?.map((product, index) => (
-                  <div
-                    key={index}
-                    className="w-full sm:w-[calc(50%-12px)] lg:w-[calc((100%/3)-(32px/3))] xl:lg:w-[calc(25%-12px)] cursor-grab">
-                    <SliderCard key={index} data={product} index={index} />
-                  </div>
-                ))}
+              : productList
+                  ?.filter((item) => item?.name?.includes(textSearch))
+                  ?.map((product, index) => (
+                    <div
+                      key={index}
+                      className="w-full sm:w-[calc(50%-12px)] lg:w-[calc((100%/3)-(32px/3))] xl:lg:w-[calc(25%-12px)] cursor-grab">
+                      <SliderCard key={index} data={product} index={index} />
+                    </div>
+                  ))}
           </div>
         </div>
       </div>

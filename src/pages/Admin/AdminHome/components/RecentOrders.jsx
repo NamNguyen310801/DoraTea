@@ -16,6 +16,7 @@ import { setShowOrder } from "../../../../redux/slice/loading.slice";
 
 export default function RecentOrders() {
   const recentOrderList = useSelector((state) => state.order.recentOrderList);
+  const allOrderList = useSelector((state) => state.order.allOrderList);
   const user = useSelector((state) => state.user.user);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -169,7 +170,7 @@ export default function RecentOrders() {
             dataSource={dataTable}
             columns={columns}
             pagination={false}
-            bordered
+            style={{ width: "100%" }}
           />
         </Spin>
       </div>

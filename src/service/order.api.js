@@ -8,7 +8,10 @@ import {
   getAllOrderURL,
   getOrderDetailsURL,
   getOrdersByMonthURL,
+  getOrdersMonthCountURL,
   getRecentOrderURL,
+  sendConfirmOrderURL,
+  sendSuccessOrderURL,
   successOrderURL,
   updateOrderURL,
 } from "./routers";
@@ -80,6 +83,14 @@ export const getOrdersByMonthAPI = async (access_token, year, month) => {
     return error;
   }
 };
+export const getOrdersMonthCountAPI = async () => {
+  try {
+    const res = await axios.get(`${getOrdersMonthCountURL}`);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
 //getDetail
 export const getOrderDetailsAPI = async (id) => {
   try {
@@ -111,6 +122,23 @@ export const successOrderAPI = async (id) => {
 export const confirmOrderAPI = async (id) => {
   try {
     const res = await axios.delete(`${confirmOrderURL}/${id}`);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
+//confirm
+export const sendConfirmOrderAPI = async (data) => {
+  try {
+    const res = await axios.post(`${sendConfirmOrderURL}`, data);
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+}; //confirm
+export const sendSuccessOrderAPI = async (data) => {
+  try {
+    const res = await axios.post(`${sendSuccessOrderURL}`, data);
     return res.data;
   } catch (error) {
     return error;

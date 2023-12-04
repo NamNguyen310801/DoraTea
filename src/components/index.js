@@ -18,3 +18,4 @@ export { default as CartIcon } from "./CartIcon";
 export { default as OrderItem } from "./OrderItem";
 export { default as BackHome } from "./BackHome";
 export { default as ButtonMessage } from "./ButtonMessage";
+export { default as PostCard } from "./PostCard";

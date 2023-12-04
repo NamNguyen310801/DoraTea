@@ -36,7 +36,7 @@ const AlertX = ({ type, message }) => {
       <Alert
         message={message}
         type="error"
-        className="fixed z-[52] top-32 right-12 px-4 py-2 transition ease-in-out duration-300"
+        className="fixed z-[52] top-32 right-12 px-4 py-2 transition ease-in-out duration-300 max-w-[350px] flex-wrap"
         showIcon
       />
     );

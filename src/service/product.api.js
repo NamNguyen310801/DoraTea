@@ -9,6 +9,7 @@ import {
   getWithCategoryURL,
   getAllPopularURL,
   getAllDiscountURL,
+  createReviewURL,
 } from "./routers";
 export const axiosJWT = axios.create();
 
@@ -109,6 +110,15 @@ export const deleteManyProduct = async (data, access_token) => {
         token: `Bearer ${access_token}`,
       },
     });
+    return res.data;
+  } catch (error) {
+    return error;
+  }
+};
+// createReview
+export const createReviewAPI = async (data) => {
+  try {
+    const res = await axios.post(`${createReviewURL}`, data);
     return res.data;
   } catch (error) {
     return error;

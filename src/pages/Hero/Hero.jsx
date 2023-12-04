@@ -2,16 +2,12 @@ import React from "react";
 import { BsMouse } from "react-icons/bs";
 import {
   Delivery2,
-  Hero1,
   Hero2,
   Hero3,
-  Hero4,
   Hero5,
-  Hero6,
   Hero7,
   Hero8,
   Hero9,
-  Hero10,
   Hero11,
 } from "../../assets";
 import "../../assets/css/animation.css";
@@ -22,19 +18,7 @@ import "swiper/css/effect-cards";
 import "../../assets/css/swiper.css";
 import { Autoplay, EffectCards } from "swiper/modules";
 export default function Hero() {
-  const heroList = [
-    Hero1,
-    Hero2,
-    Hero3,
-    Hero4,
-    Hero5,
-    Hero6,
-    Hero7,
-    Hero8,
-    Hero9,
-    Hero10,
-    Hero11,
-  ];
+  const heroList = [Hero2, Hero3, Hero5, Hero7, Hero8, Hero9, Hero11];
   return (
     <section className="text-gray-600 body-font lg:h-[calc(100vh-94px)]">
       <div className="container mx-auto flex md:px-5 md:pb-24 md:flex-row flex-col items-center ">

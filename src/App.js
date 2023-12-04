@@ -3,10 +3,12 @@ import {
   About,
   Admin,
   Checkout,
+  ForgetPassword,
   Home,
   Login,
   Menu,
-  Service,
+  News,
+  ProductDetail,
   SignUp,
   User,
 } from "./pages";
@@ -67,7 +69,7 @@ function App() {
   useEffect(() => {
     handleGetCategory();
     getDataList();
-    handleGetAllProduct();
+    // handleGetAllProduct();
   }, []);
 
   useEffect(() => {
@@ -209,13 +211,19 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin/*" element={<Admin />} />
-        <Route path="/user/*" element={<User />} />
+        <Route path="/forget-password" element={<ForgetPassword />} />
+        <Route
+          path="/admin/*"
+          element={user && user?.isAdmin ? <Admin /> : <NotFound />}
+        />
+
+        <Route path="/user/*" element={user ? <User /> : <NotFound />} />
         <Route path="/menu/*" element={<Menu />} />
         <Route path="/about/*" element={<About />} />
         <Route path="/createOrder" element={<Order />} />
         <Route path="/checkout" element={<Checkout />} />
-        <Route path="/services" element={<Service />} />
+        <Route path="/news/*" element={<News />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {alert && <Alert type={alert.type} message={alert.message} />}

@@ -9,6 +9,8 @@ import QRCode from "react-qr-code";
 import {
   cancelOrderAPI,
   confirmOrderAPI,
+  sendConfirmOrderAPI,
+  sendSuccessOrderAPI,
   successOrderAPI,
 } from "../../../service/order.api";
 import { updateAllOrderList } from "../../../redux/slice/order.slice";
@@ -24,8 +26,10 @@ const { confirm } = Modal;
 export default function OrderAdminDetail({ onClose }) {
   const orderId = useSelector((state) => state.order.orderId);
   const allOrderList = useSelector((state) => state.order.allOrderList);
+  const userList = useSelector((state) => state.user.userList);
   const showOrder = useSelector((state) => state.loading.showOrder);
   const [order, setOrder] = useState(null);
+  const [email, setEmail] = useState("");
   const dispatch = useDispatch();
   const componentRef = useRef();
   useEffect(() => {
@@ -34,7 +38,9 @@ export default function OrderAdminDetail({ onClose }) {
 
   const getOrder = async (id) => {
     const orderItem = await allOrderList?.find((item) => item._id === id);
+    const user = userList?.find((user) => user?._id === orderItem?.user);
     setOrder(orderItem);
+    setEmail(user?.email);
   };
   const handleOnClose = (e) => {
     if (e.target.id === "orderDetail") onClose();
@@ -62,6 +68,10 @@ export default function OrderAdminDetail({ onClose }) {
     const res = await successOrderAPI(orderId);
     if (res.status === "OK") {
       dispatch(setSuccessAlert(res.message));
+      await sendSuccessOrderAPI({ email });
+      setTimeout(() => {
+        dispatch(setNullAlert());
+      }, 1000);
       dispatch(
         updateAllOrderList({
           ...order,
@@ -77,9 +87,17 @@ export default function OrderAdminDetail({ onClose }) {
     }
   };
   const handleConfirm = async () => {
+    const data = {
+      email: email,
+      orderId: orderId,
+    };
     const res = await confirmOrderAPI(orderId);
     if (res.status === "OK") {
       dispatch(setSuccessAlert(res.message));
+      await sendConfirmOrderAPI(data);
+      setTimeout(() => {
+        dispatch(setNullAlert());
+      }, 1000);
       dispatch(
         updateAllOrderList({
           ...order,
@@ -90,9 +108,8 @@ export default function OrderAdminDetail({ onClose }) {
         })
       );
       setTimeout(() => {
-        handlePrint();
         dispatch(setNullAlert());
-      }, 2000);
+      }, 1000);
     }
   };
   const handleCancelModal = () => {
@@ -114,8 +131,8 @@ export default function OrderAdminDetail({ onClose }) {
       className={`${
         showOrder ? "" : "hidden "
       }fixed z-[51] flex items-center justify-center w-full top-0 left-0 h-full bg-gray-400 bg-opacity-20 backdrop-blur-sm min-h-[750px]`}>
-      <div className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
-        <div className="relative flex w-full flex-col  overflow-hidden rounded-md bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+      <div className="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl overflow-hidden">
+        <div className="relative flex w-full flex-col  overflow-hidden rounded-md bg-white px-4 pb-8 pt-14 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8 max-h-[700px] overflow-y-auto">
           <button
             onClick={onClose}
             className="absolute right-4 top-4 text-gray-400 hover:text-gray-500 sm:right-6 sm:top-8 md:right-6 md:top-6 lg:right-4 lg:top-4">
@@ -165,8 +182,8 @@ export default function OrderAdminDetail({ onClose }) {
           </section>
           <section>
             <div>
-              <div>
-                <div className="py-3 px-6">
+              <div className="">
+                <div className="py-3 px-6 max-h-[240px] overflow-y-auto">
                   <div className="pb-3 flex items-center justify-start">
                     <div className="flex items-center">
                       <div className="text-sm/4 uppercase font-semibold text-gray-700">
@@ -179,7 +196,7 @@ export default function OrderAdminDetail({ onClose }) {
                     <Link
                       key={item?._id}
                       className="flex items-center text-base break-words pt-3 flex-nowrap text-[rgba(0,0,0,0.87)]"
-                      to={`/product/${item?.product?._id}`}>
+                      to={`product/${item?.product?._id}`}>
                       <div className="flex flex-1 flex-nowrap items-start pr-3 break-words ">
                         <img
                           className="w-20 h-20 flex-shrink-0 border object-contain rounded overflow-hidden bg-[rgb(225,225,225)]"
@@ -228,7 +245,6 @@ export default function OrderAdminDetail({ onClose }) {
                     </Link>
                   ))}
                 </div>
-
                 <div>
                   <div className="px-6 flex justify-end text-right border-b border-dotted border-black/[0.09] bg-[rgb(255,254,250)] ">
                     <div className="px-[10px] py-[13px] text-black/50 text-base">

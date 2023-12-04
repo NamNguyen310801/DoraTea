@@ -2,19 +2,22 @@ import { HomeOutlined } from "@ant-design/icons";
 import { Button } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 export default function About() {
   return (
     <>
-      <section className="text-gray-600 body-font relative">
+      <Header />
+      <main className="container relative mx-auto pt-16 bg-slate-100 mt-10 min-h-[calc(100vh)] px-2 md:px-0">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-col text-center w-full mb-12">
             <h1 className="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
               Liên hệ chúng tôi:
             </h1>
             <p className="lg:w-2/3 mx-auto leading-relaxed text-base">
-              Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
-              gentrify.
+              Nếu bạn có bất kì câu hỏi hoặc thắc mắc nào hãy liên hệ với chúng
+              tôi để được giải đáp.
             </p>
           </div>
           <div className="lg:w-1/2 md:w-2/3 mx-auto">
@@ -72,9 +75,9 @@ export default function About() {
               <div className="p-2 w-full pt-8 mt-8 border-t border-gray-200 text-center">
                 <a className="text-indigo-500">doratea@email.com</a>
                 <p className="leading-normal my-5">
-                  49 Smith St.
+                  Tầng 2 tòa nhà T10,
                   <br />
-                  Saint Cloud, MN 56301
+                  Times City Vĩnh Tuy, Hai Bà Trưng, Hà Nội
                 </p>
                 <span className="inline-flex">
                   <a className="text-gray-500">
@@ -128,17 +131,8 @@ export default function About() {
             </div>
           </div>
         </div>
-        <div className="mt-6 absolute top-3 left-4">
-          <Link to="/" className="outline-none group cursor-pointer">
-            <Button type="primary">
-              <span className="flex items-center justify-center gap-x-2">
-                <HomeOutlined />
-                <span>Quay lại trang chủ</span>
-              </span>
-            </Button>
-          </Link>
-        </div>
-      </section>
+      </main>
+      <Footer />
     </>
   );
 }

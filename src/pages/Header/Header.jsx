@@ -72,15 +72,15 @@ export default function Header() {
             className={({ isActive }) =>
               isActive ? isActiveStyles : isNotActiveStyles
             }
-            to={"/services"}>
-            Dịch vụ
+            to={"/news"}>
+            Tin tức
           </NavLink>
           <NavLink
             className={({ isActive }) =>
               isActive ? isActiveStyles : isNotActiveStyles
             }
             to={"/about"}>
-            Về chúng tôi
+            Liên hệ
           </NavLink>
         </ul>
         <CartIcon />

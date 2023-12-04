@@ -130,7 +130,7 @@ export default function Login() {
 
           <div className="w-full">
             <Link
-              to={""}
+              to={"/forget-password"}
               className="text-blue-400 cursor-pointer bg-transparent active:scale-95 hover:text-blue-500">
               Quên mật khẩu?
             </Link>

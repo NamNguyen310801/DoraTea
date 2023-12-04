@@ -22,7 +22,7 @@ function PopularProducts() {
     }
   };
   return (
-    <div className="w-[20%] bg-white p-4 rounded-sm border border-gray-200">
+    <div className="w-[20%] bg-white p-4 rounded-sm border border-gray-200 overflow-y-auto">
       <strong className="text-gray-700 font-medium">Sản phẩm phổ biến</strong>
       <div className="mt-4 flex flex-col gap-3">
         {popularList?.map((product) => (

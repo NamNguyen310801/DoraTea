@@ -89,11 +89,11 @@ const items = [
         "order",
         <HiOutlineClipboardList className="md:text-xl font-semibold" />
       ),
-      getItem(
-        "Thêm đơn hàng",
-        "newOrder",
-        <HiOutlineDocumentAdd className="md:text-xl font-semibold" />
-      ),
+      // getItem(
+      //   "Thêm đơn hàng",
+      //   "newOrder",
+      //   <HiOutlineDocumentAdd className="md:text-xl font-semibold" />
+      // ),
       getItem(
         "Thống kê đơn hàng",
         "statsOrder",

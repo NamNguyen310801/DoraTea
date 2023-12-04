@@ -13,12 +13,17 @@ import {
 } from "../redux/slice/alert.slice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { setDataDetail, setShowDetail } from "../redux/slice/product.slice";
 
 export default function SliderCard({ data, isNew = false }) {
   const user = useSelector((state) => state.user.user);
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+  const handleGetDetail = () => {
+    dispatch(setShowDetail(true));
+    dispatch(setDataDetail(data));
+  };
   const productList = useSelector((state) => state.product.productList);
   const [cartItem, setCartItem] = useState(data);
   const [cartItemSlice, setCartItemSlice] = useState({
@@ -85,7 +90,9 @@ export default function SliderCard({ data, isNew = false }) {
             <IoBasket className="text-2xl text-primary" />
           </div>
         </Tooltip>
-        <p className="text-lg text-headingColor font-semibold text-center text-ellipsis">
+        <p
+          className="text-lg text-headingColor font-semibold text-center text-ellipsis cursor-pointer"
+          onClick={handleGetDetail}>
           {data?.name}
         </p>
         <div className="flex items-center justify-end w-full">

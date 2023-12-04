@@ -18,12 +18,12 @@ import orderSlice from "./slice/order.slice";
 import loadingSlice from "./slice/loading.slice";
 import cartSlice from "./slice/cart.slice";
 import orderMonthSlice from "./slice/orderMonth.slice";
-
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["user", "alert", "loading", "product", "order", "orderMonth"],
+  blacklist: ["alert", "loading", "order", "user", "product"],
 };
+
 const rootReducer = combineReducers({
   user: userSlice,
   alert: alertSlice,

@@ -74,7 +74,7 @@ export default function DashboardStatsGrid() {
               value={productList?.length}
               formatter={formatter}
             />
-            <span className="text-sm text-green-500 pl-2">+0</span>
+            {/* <span className="text-sm text-green-500 pl-2">+0</span> */}
           </div>
         </div>
       </BoxWrapper>
@@ -90,7 +90,7 @@ export default function DashboardStatsGrid() {
               value={allCategory?.length}
               formatter={formatter}
             />
-            <span className="text-sm text-green-500 pl-2">-0</span>
+            {/* <span className="text-sm text-green-500 pl-2">-0</span> */}
           </div>
         </div>
       </BoxWrapper>
@@ -106,7 +106,7 @@ export default function DashboardStatsGrid() {
               value={userList?.length}
               formatter={formatter}
             />
-            <span className="text-sm text-red-500 pl-2">-30</span>
+            {/* <span className="text-sm text-red-500 pl-2">-30</span> */}
           </div>
         </div>
       </BoxWrapper>
@@ -122,7 +122,7 @@ export default function DashboardStatsGrid() {
               value={allOrderList?.length}
               formatter={formatter}
             />
-            <span className="text-sm text-red-500 pl-2">-43</span>
+            {/* <span className="text-sm text-red-500 pl-2">-43</span> */}
           </div>
         </div>
       </BoxWrapper>

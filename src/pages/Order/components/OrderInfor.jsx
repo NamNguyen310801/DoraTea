@@ -32,6 +32,9 @@ export default function OrderInfor() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
+  const orderList = useSelector((state) => state.order.orderList);
+  const allOrderList = useSelector((state) => state.order.allOrderList);
+
   const fullName = useSelector((state) => state.order.fullName);
   const phone = useSelector((state) => state.order.phone);
   const address = useSelector((state) => state.order.address);
@@ -46,6 +49,8 @@ export default function OrderInfor() {
   const deliveredAt = useSelector((state) => state.order.deliveredAt);
   const isCancelled = useSelector((state) => state.order.isCancelled);
 
+  console.log(orderList);
+  console.log(allOrderList);
   useEffect(() => {
     dispatch(setTotalOrderPrice(totalItemsPrice + shippingPrice));
   }, [shippingPrice, totalItemsPrice]);
@@ -104,6 +109,7 @@ export default function OrderInfor() {
           );
           const orders = await OrderService.getAllOrderDetailsAPI(user?.id);
           if (orders.status === "OK") {
+            console.log(orders.data);
             dispatch(setOrderList(orders.data));
           }
         } else {
