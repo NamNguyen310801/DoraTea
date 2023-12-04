@@ -3,6 +3,7 @@ const initialState = {
   loadingPopular: false,
   loadingSale: false,
   showOrder: false,
+  showRateModal: false,
   textSearch: "",
 };
 
@@ -19,6 +20,9 @@ const loadingSlice = createSlice({
     setShowOrder: (state, action) => {
       state.showOrder = action.payload;
     },
+    setShowRateModal: (state, action) => {
+      state.showRateModal = action.payload;
+    },
     setTextSearch: (state, action) => {
       state.textSearch = action.payload;
     },
@@ -30,5 +34,6 @@ export const {
   setLoadingPopular,
   setShowOrder,
   setTextSearch,
+  setShowRateModal,
 } = loadingSlice.actions;
 export default loadingSlice.reducer;

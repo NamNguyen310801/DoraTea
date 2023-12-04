@@ -1,10 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { RiArrowLeftSLine } from "react-icons/ri";
 import { SiAdguard } from "react-icons/si";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { Modal } from "antd";
-import { ExclamationCircleFilled } from "@ant-design/icons";
+import { useNavigate, useParams } from "react-router-dom";
+import { Form, Image, Input, Modal, Rate, Typography } from "antd";
+import {
+  ExclamationCircleFilled,
+  FrownOutlined,
+  MehOutlined,
+  SmileOutlined,
+} from "@ant-design/icons";
 import {
   addToOrderItems,
   resetOrder,
@@ -12,10 +17,21 @@ import {
 } from "../../../redux/slice/order.slice";
 import { convertPrice } from "../../../utils/function";
 import { cancelOrderAPI } from "../../../service/order.api";
+import OrderDetailItem from "./OrderDetailItem";
+import { setShowRateModal } from "../../../redux/slice/loading.slice";
+import { setProductRate } from "../../../redux/slice/product.slice";
+import { createReviewAPI } from "../../../service/product.api";
+import {
+  setErrAlert,
+  setNullAlert,
+  setSuccessAlert,
+} from "../../../redux/slice/alert.slice";
 const { confirm } = Modal;
 export default function OrderDetail() {
   const { id } = useParams();
   const orderList = useSelector((state) => state.order.orderList);
+  const showRateModal = useSelector((state) => state.loading.showRateModal);
+  const productRate = useSelector((state) => state.product.productRate);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [orderDetail, setDetail] = useState(null);
@@ -27,7 +43,6 @@ export default function OrderDetail() {
       setDetail(order);
     }
   }, [id]);
-
   const handleCancel = async () => {
     const res = await cancelOrderAPI(orderDetail?._id);
     if (res.status === "OK") {
@@ -40,6 +55,22 @@ export default function OrderDetail() {
           isCancelled: true,
         })
       );
+    }
+  };
+  const reviewProduct = async (data) => {
+    const res = await createReviewAPI(data);
+    if (res.status === "OK") {
+      dispatch(setSuccessAlert(res.message));
+      dispatch(setShowRateModal(false));
+      dispatch(setProductRate(null));
+      setTimeout(() => {
+        dispatch(setNullAlert());
+      }, 1000);
+    } else {
+      dispatch(setErrAlert("Cập nhật thất bại"));
+      setTimeout(() => {
+        dispatch(setNullAlert());
+      }, 1000);
     }
   };
   const handleCancelModal = () => {
@@ -63,8 +94,43 @@ export default function OrderDetail() {
       navigate("/createOrder");
     }, 1000);
   };
+  // const
+  const [form] = Form.useForm();
+  const [formData, setFormData] = useState({
+    rating: 2.5,
+    description: "",
+  });
+  useEffect(() => {
+    form.setFieldsValue({
+      rating: formData?.rating,
+      description: formData?.description,
+    });
+  }, [formData, form]);
+  const handleValuesChange = (changedValues, allValues) => {
+    setFormData((prevData) => ({ ...prevData, ...changedValues }));
+  };
+  const onCancel = () => {
+    setFormData();
+    dispatch(setShowRateModal(false));
+    dispatch(setProductRate(null));
+  };
+  const onOk = () => {
+    setFormData();
+    reviewProduct({
+      productId: productRate?._id,
+      rating: formData?.rating,
+      description: formData?.description,
+    });
+  };
+  const customIcons = {
+    1: <FrownOutlined />,
+    2: <FrownOutlined />,
+    3: <MehOutlined />,
+    4: <SmileOutlined />,
+    5: <SmileOutlined />,
+  };
   return (
-    <div className="min-h-[740px]">
+    <div className="min-h-[740px] relative">
       <main className="rounded-sm block">
         <section>
           <div className="px-6 py-5 text-sm/4 flex justify-between items-center">
@@ -115,7 +181,7 @@ export default function OrderDetail() {
         </section>
         <section>
           <div className="py-3 px-6 flex flex-nowrap items-center justify-end">
-            {!orderDetail?.isSuccessOrder ? (
+            {!orderDetail?.isDelivered || !orderDetail?.isSuccessOrder ? (
               <div onClick={() => handleCancelModal()}>
                 <button
                   className={`${
@@ -171,56 +237,7 @@ export default function OrderDetail() {
                 </div>
                 <div className="border-b" />
                 {orderDetail?.orderItems.map((item) => (
-                  <Link
-                    key={item?._id}
-                    className="flex items-center text-base break-words pt-3 flex-nowrap text-[rgba(0,0,0,0.87)]"
-                    to={`/product/${item?.product?._id}`}>
-                    <div className="flex flex-1 flex-nowrap items-start pr-3 break-words ">
-                      <img
-                        className="w-20 h-20 flex-shrink-0 border object-contain rounded overflow-hidden bg-[rgb(225,225,225)]"
-                        src={item?.product?.image}
-                        alt={item?.product?.name}
-                      />
-                      <div className="min-w-0 pl-3 flex flex-1 flex-col items-start break-words">
-                        <div className="overflow-hidden text-ellipsis mb-[5px] text-lg/5 max-h-12 line-clamp-2">
-                          <span className="align-middle ">
-                            {item?.product?.name}
-                          </span>
-                        </div>
-                        <div>
-                          <div className="mb-[5px] text-[rgba(0,0,0,0.54)] ">
-                            Phân loại: {item?.product?.category}
-                          </div>
-                          <div className="mb-[5px]">x{item?.quantity}</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="text-right">
-                      <div className="ml-3">
-                        {Boolean(item?.product?.discount) && (
-                          <span className="mr-1 line-through text-black opacity-25 overflow-hidden text-ellipsis">
-                            {convertPrice(
-                              item?.product?.price * item?.quantity
-                            )}
-                          </span>
-                        )}
-
-                        <span className="text-[#ee4d2d] ">
-                          {convertPrice(
-                            Math.round(
-                              (item?.product?.price -
-                                item?.product?.price *
-                                  item?.product?.discount *
-                                  0.01) /
-                                1000
-                            ) *
-                              1000 *
-                              item?.quantity
-                          )}
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
+                  <OrderDetailItem item={item} key={item?._id} />
                 ))}
               </div>
 
@@ -273,6 +290,56 @@ export default function OrderDetail() {
           </div>
         </section>
       </main>
+      <Modal
+        forceRender
+        className="rate-modal"
+        open={showRateModal}
+        title="Đánh giá sản phẩm"
+        onCancel={() => onCancel()}
+        onOk={onOk}>
+        <Form
+          form={form}
+          labelCol={{ span: 4 }}
+          wrapperCol={{ span: 20 }}
+          style={{
+            background: "#E8E8E8",
+            borderRadius: "6px",
+            height: "100%",
+            padding: "5px",
+          }}
+          onValuesChange={handleValuesChange}
+          name="rate-product">
+          <Form.Item
+            style={{
+              display: "flex",
+            }}>
+            <Image width={40} src={productRate?.image} />
+            <Typography.Text
+              style={{
+                fontSize: 16,
+                fontWeight: 600,
+                marginLeft: "8px",
+              }}>
+              Trà sữa Socola
+            </Typography.Text>
+          </Form.Item>
+          <Form.Item name="rating" label="Đánh giá">
+            <Rate
+              style={{
+                color: "#FFCC00",
+
+                width: "100%",
+              }}
+              allowHalf
+              allowClear={false}
+              character={({ index }) => customIcons[index + 1]}
+            />
+          </Form.Item>
+          <Form.Item label="Mô tả" name="description">
+            <Input placeholder="Nhập ý kiến của bạn" />
+          </Form.Item>
+        </Form>
+      </Modal>
     </div>
   );
 }

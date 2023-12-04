@@ -6,6 +6,7 @@ const initialState = {
   discountList: null,
   showDetail: false,
   dataDetail: [],
+  productRate: null,
 };
 
 const productSlice = createSlice({
@@ -51,6 +52,9 @@ const productSlice = createSlice({
     setDataDetail: (state, action) => {
       state.dataDetail = action.payload;
     },
+    setProductRate: (state, action) => {
+      state.productRate = action.payload;
+    },
   },
 });
 
@@ -64,5 +68,6 @@ export const {
   setDiscountList,
   setShowDetail,
   setDataDetail,
+  setProductRate,
 } = productSlice.actions;
 export default productSlice.reducer;

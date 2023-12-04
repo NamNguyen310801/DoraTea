@@ -69,7 +69,7 @@ function App() {
   useEffect(() => {
     handleGetCategory();
     getDataList();
-    // handleGetAllProduct();
+    handleGetAllProduct();
   }, []);
 
   useEffect(() => {
