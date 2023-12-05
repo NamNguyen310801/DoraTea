@@ -51,7 +51,7 @@ export default function Admin() {
   }, [recentOrderList]);
 
   useEffect(() => {
-    if (orderMonthCountList) {
+    if (!orderMonthCountList) {
       handleGetOrder();
     }
   }, [orderMonthCountList]);

@@ -20,7 +20,7 @@ export default function TransactionChart() {
   const [data, setData] = useState([]);
   // const currentYear = new Date().getFullYear();
   useEffect(() => {
-    if (orderMonthCountList) {
+    if (!orderMonthCountList) {
       handleGetOrder();
     }
     setData([
