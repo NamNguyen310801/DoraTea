@@ -41,8 +41,12 @@ import {
   setTotalPrice,
 } from "./redux/slice/cart.slice";
 import Order from "./pages/Order/Order";
-import { getAllOrderDetailsAPI } from "./service/order.api";
+import {
+  getAllOrderDetailsAPI,
+  getOrdersMonthCountAPI,
+} from "./service/order.api";
 import { setOrderList } from "./redux/slice/order.slice";
+import { setOrderCountList } from "./redux/slice/orderMonth.slice";
 
 function App() {
   const dispatch = useDispatch();
@@ -69,6 +73,7 @@ function App() {
   useEffect(() => {
     handleGetCategory();
     getDataList();
+    handleGetOrder();
     handleGetAllProduct();
   }, []);
 
@@ -173,6 +178,14 @@ function App() {
     const res = await ProductService.getAllProduct();
     if (res.status === "OK") {
       dispatch(setProductList(res.data));
+    } else {
+      console.log(res.message);
+    }
+  };
+  const handleGetOrder = async () => {
+    const res = await getOrdersMonthCountAPI();
+    if (res.status === "OK") {
+      dispatch(setOrderCountList(res?.data));
     } else {
       console.log(res.message);
     }
