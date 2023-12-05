@@ -40,6 +40,7 @@ export default function Login() {
       }
       // Hiển thị thành công
       else if (res.status === "OK") {
+        console.log(res);
         localStorage.setItem("access_token", JSON.stringify(res?.access_token));
         localStorage.setItem(
           "refresh_token",
