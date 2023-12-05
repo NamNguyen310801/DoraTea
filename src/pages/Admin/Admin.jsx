@@ -27,6 +27,9 @@ export default function Admin() {
   const allOrderList = useSelector((state) => state.order.allOrderList);
   const user = useSelector((state) => state.user.user);
   const recentOrderList = useSelector((state) => state.order.recentOrderList);
+  const orderMonthCountList = useSelector(
+    (state) => state.orderMonth.orderMonthCountList
+  );
   useEffect(() => {
     if (!userList) {
       handleGetAllUser();
@@ -46,18 +49,10 @@ export default function Admin() {
   useEffect(() => {
     handleGetRecentOrder();
   }, [recentOrderList]);
-  useEffect(() => {
-    handleGetOrder();
-  }, []);
 
-  const handleGetOrder = async () => {
-    const res = await getOrdersMonthCountAPI();
-    if (res.status === "OK") {
-      dispatch(setOrderCountList(res?.data));
-    } else {
-      console.log(res.message);
-    }
-  };
+  useEffect(() => {
+    if (orderMonthCountList?.length === 0) handleGetOrder();
+  }, [orderMonthCountList]);
   // Lay danh sach
   const handleGetAllUser = async () => {
     const res = await UserService.getAllUser();
@@ -100,6 +95,15 @@ export default function Admin() {
       setTimeout(() => {
         setNullAlert();
       }, 2000);
+    }
+  };
+
+  const handleGetOrder = async () => {
+    const res = await getOrdersMonthCountAPI();
+    if (res.status === "OK") {
+      dispatch(setOrderCountList(res?.data));
+    } else {
+      console.log(res.message);
     }
   };
   return (

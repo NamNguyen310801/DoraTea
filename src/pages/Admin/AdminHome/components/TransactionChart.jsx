@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   BarChart,
@@ -17,10 +17,60 @@ export default function TransactionChart() {
   const orderMonthCountList = useSelector(
     (state) => state.orderMonth.orderMonthCountList
   );
-
+  const [data, setData] = useState([]);
   // const currentYear = new Date().getFullYear();
   useEffect(() => {
     if (orderMonthCountList?.length === 0) handleGetOrder();
+    setData([
+      {
+        name: "Tháng 1",
+        amount: orderMonthCountList?.data[1] || 0,
+      },
+      {
+        name: "Tháng 2",
+        amount: orderMonthCountList?.data[2] || 0,
+      },
+      {
+        name: "Tháng 3",
+        amount: orderMonthCountList?.data[3] || 0,
+      },
+      {
+        name: "Tháng 4",
+        amount: orderMonthCountList?.data[4] || 0,
+      },
+      {
+        name: "Tháng 5",
+        amount: orderMonthCountList?.data[5] || 0,
+      },
+      {
+        name: "Tháng 6",
+        amount: orderMonthCountList?.data[6] || 0,
+      },
+      {
+        name: "Tháng 7",
+        amount: orderMonthCountList?.data[7] || 0,
+      },
+      {
+        name: "Tháng 8",
+        amount: orderMonthCountList?.data[8] || 0,
+      },
+      {
+        name: "Tháng 9",
+        amount: orderMonthCountList?.data[9] || 0,
+      },
+      {
+        name: "Tháng 10",
+        amount: orderMonthCountList?.data[10] || 0,
+      },
+      {
+        name: "Tháng 11",
+        amount: orderMonthCountList?.data[11] || 0,
+      },
+      {
+        name: "Tháng 12",
+        amount: orderMonthCountList?.data[12] || 0,
+      },
+    ]);
   }, [orderMonthCountList]);
 
   const handleGetOrder = async () => {
@@ -31,56 +81,7 @@ export default function TransactionChart() {
       console.log(res.message);
     }
   };
-  const data = [
-    {
-      name: "Tháng 1",
-      amount: orderMonthCountList?.data[1] || 0,
-    },
-    {
-      name: "Tháng 2",
-      amount: orderMonthCountList?.data[2] || 0,
-    },
-    {
-      name: "Tháng 3",
-      amount: orderMonthCountList?.data[3] || 0,
-    },
-    {
-      name: "Tháng 4",
-      amount: orderMonthCountList?.data[4] || 0,
-    },
-    {
-      name: "Tháng 5",
-      amount: orderMonthCountList?.data[5] || 0,
-    },
-    {
-      name: "Tháng 6",
-      amount: orderMonthCountList?.data[6] || 0,
-    },
-    {
-      name: "Tháng 7",
-      amount: orderMonthCountList?.data[7] || 0,
-    },
-    {
-      name: "Tháng 8",
-      amount: orderMonthCountList?.data[8] || 0,
-    },
-    {
-      name: "Tháng 9",
-      amount: orderMonthCountList?.data[9] || 0,
-    },
-    {
-      name: "Tháng 10",
-      amount: orderMonthCountList?.data[10] || 0,
-    },
-    {
-      name: "Tháng 11",
-      amount: orderMonthCountList?.data[11] || 0,
-    },
-    {
-      name: "Tháng 12",
-      amount: orderMonthCountList?.data[12] || 0,
-    },
-  ];
+
   return (
     <div className="h-full bg-white p-4 rounded-sm border border-gray-200 flex flex-col flex-1">
       <strong className="text-gray-700 font-medium">Thống kê giao dịch</strong>
