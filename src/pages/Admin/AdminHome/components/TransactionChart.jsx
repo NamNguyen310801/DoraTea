@@ -104,7 +104,7 @@ export default function TransactionChart() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="Số lượng" fill="#A2B5CD" />
+            <Bar dataKey="amount" fill="#A2B5CD" />
           </BarChart>
         </ResponsiveContainer>
       </div>
