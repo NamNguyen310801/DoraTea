@@ -51,7 +51,9 @@ export default function Admin() {
   }, [recentOrderList]);
 
   useEffect(() => {
-    if (orderMonthCountList?.length === 0) handleGetOrder();
+    if (orderMonthCountList) {
+      handleGetOrder();
+    }
   }, [orderMonthCountList]);
   // Lay danh sach
   const handleGetAllUser = async () => {

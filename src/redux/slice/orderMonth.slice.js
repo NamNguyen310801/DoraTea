@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
-  orderMonthCountList: [],
+  orderMonthCountList: null,
 };
 
 const orderMonthSlice = createSlice({

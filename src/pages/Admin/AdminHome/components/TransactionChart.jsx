@@ -20,55 +20,57 @@ export default function TransactionChart() {
   const [data, setData] = useState([]);
   // const currentYear = new Date().getFullYear();
   useEffect(() => {
-    if (orderMonthCountList?.length === 0) handleGetOrder();
+    if (orderMonthCountList) {
+      handleGetOrder();
+    }
     setData([
       {
         name: "Tháng 1",
-        amount: orderMonthCountList?.data[1] || 0,
+        amount: (orderMonthCountList && orderMonthCountList?.data[1]) || 0,
       },
       {
         name: "Tháng 2",
-        amount: orderMonthCountList?.data[2] || 0,
+        amount: (orderMonthCountList && orderMonthCountList?.data[2]) || 0,
       },
       {
         name: "Tháng 3",
-        amount: orderMonthCountList?.data[3] || 0,
+        amount: (orderMonthCountList && orderMonthCountList?.data[3]) || 0,
       },
       {
         name: "Tháng 4",
-        amount: orderMonthCountList?.data[4] || 0,
+        amount: (orderMonthCountList && orderMonthCountList?.data[4]) || 0,
       },
       {
         name: "Tháng 5",
-        amount: orderMonthCountList?.data[5] || 0,
+        amount: (orderMonthCountList && orderMonthCountList?.data[5]) || 0,
       },
       {
         name: "Tháng 6",
-        amount: orderMonthCountList?.data[6] || 0,
+        amount: (orderMonthCountList && orderMonthCountList?.data[6]) || 0,
       },
       {
         name: "Tháng 7",
-        amount: orderMonthCountList?.data[7] || 0,
+        amount: (orderMonthCountList && orderMonthCountList?.data[7]) || 0,
       },
       {
         name: "Tháng 8",
-        amount: orderMonthCountList?.data[8] || 0,
+        amount: (orderMonthCountList && orderMonthCountList?.data[8]) || 0,
       },
       {
         name: "Tháng 9",
-        amount: orderMonthCountList?.data[9] || 0,
+        amount: (orderMonthCountList && orderMonthCountList?.data[9]) || 0,
       },
       {
         name: "Tháng 10",
-        amount: orderMonthCountList?.data[10] || 0,
+        amount: (orderMonthCountList && orderMonthCountList?.data[10]) || 0,
       },
       {
         name: "Tháng 11",
-        amount: orderMonthCountList?.data[11] || 0,
+        amount: (orderMonthCountList && orderMonthCountList?.data[11]) || 0,
       },
       {
         name: "Tháng 12",
-        amount: orderMonthCountList?.data[12] || 0,
+        amount: (orderMonthCountList && orderMonthCountList?.data[12]) || 0,
       },
     ]);
   }, [orderMonthCountList]);
