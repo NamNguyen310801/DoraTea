@@ -12,6 +12,7 @@ import {
   setSuccessAlert,
   setWarningAlert,
 } from "../../redux/slice/alert.slice";
+import { getRegexPassword } from "../../utils/stringsUtils";
 // import { getRegexPassword } from "../../utils/stringsUtils";
 export default function SignUp() {
   const dispatch = useDispatch();
