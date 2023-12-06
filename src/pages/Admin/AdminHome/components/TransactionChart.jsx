@@ -83,7 +83,8 @@ export default function TransactionChart() {
       console.log(res.message);
     }
   };
-
+  console.log(orderMonthCountList);
+  console.log(data);
   return (
     <div className="h-full bg-white p-4 rounded-sm border border-gray-200 flex flex-col flex-1">
       <strong className="text-gray-700 font-medium">Thống kê giao dịch</strong>
@@ -104,7 +105,7 @@ export default function TransactionChart() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="Số lượng" fill="#A2B5CD" />
+            <Bar dataKey="amount" fill="#A2B5CD" />
           </BarChart>
         </ResponsiveContainer>
       </div>

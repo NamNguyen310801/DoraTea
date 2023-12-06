@@ -162,11 +162,11 @@ export default function SignUp() {
                 required: true,
                 message: "Vui lòng nhập thông tin!",
               },
-              // {
-              //   pattern: getRegexPassword(),
-              //   message:
-              //     "Mật khẩu có chứa ít nhất 8 ký tự, trong đó có ít nhất một số và bao gồm cả chữ thường và chữ hoa và ký tự đặc biệt, ví dụ @, #, ?, !.",
-              // },
+              {
+                pattern: getRegexPassword(),
+                message:
+                  "Mật khẩu có chứa ít nhất 8 ký tự, trong đó có ít nhất một số và bao gồm cả chữ thường và chữ hoa và ký tự đặc biệt, ví dụ @, #, ?, !.",
+              },
             ]}
             hasFeedback>
             <Input.Password placeholder="Nhập mật khẩu" />
