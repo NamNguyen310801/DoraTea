@@ -21,7 +21,15 @@ import orderMonthSlice from "./slice/orderMonth.slice";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["alert", "loading", "order", "user", "product"],
+  blacklist: [
+    "alert",
+    "loading",
+    "order",
+    "user",
+    "product",
+    "orderMonth",
+    "category",
+  ],
 };
 
 const rootReducer = combineReducers({

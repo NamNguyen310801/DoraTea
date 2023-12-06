@@ -43,11 +43,15 @@ export default function Admin() {
   }, []);
 
   useEffect(() => {
-    handleGetAllOrderList();
+    if (!allOrderList) {
+      handleGetAllOrderList();
+    }
   }, [allOrderList]);
 
   useEffect(() => {
-    handleGetRecentOrder();
+    if (!recentOrderList) {
+      handleGetRecentOrder();
+    }
   }, [recentOrderList]);
 
   useEffect(() => {
