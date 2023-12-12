@@ -48,15 +48,8 @@ const items = [
   ),
   getItem(
     "Đơn hàng",
-    "orderStaff",
-    <ContainerOutlined className="md:text-xl font-semibold" />,
-    [
-      getItem(
-        "Danh sách",
-        "order",
-        <HiOutlineClipboardList className="md:text-xl font-semibold" />
-      ),
-    ]
+    "order",
+    <ContainerOutlined className="md:text-xl font-semibold" />
   ),
 ];
 export default function StaffPage() {
