@@ -1,4 +1,3 @@
-import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Content } from "antd/es/layout/layout";
 import { ChartCategory, NewProduct, ProductList } from "../AdminProduct";

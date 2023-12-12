@@ -28,7 +28,7 @@ export default function NewUser() {
     name: "",
     email: "",
     password: "",
-    isAdmin: false,
+    role: 3,
     phone: "",
     address: "",
     avatar: "",
@@ -192,17 +192,24 @@ export default function NewUser() {
           <Input.Password placeholder="Xác nhận mật khẩu" />
         </Form.Item>
 
-        <Form.Item label="Vai trò" name="isAdmin" hasFeedback>
+        <Form.Item label="Vai trò" name="role" hasFeedback>
           <Select
-            onChange={(value) =>
-              setData((prev) => ({
-                ...prev,
-                isAdmin: JSON.parse(value),
-              }))
-            }>
-            <Select.Option value="true">Quản lý</Select.Option>
-            <Select.Option value="false">Người dùng</Select.Option>
-          </Select>
+            placeholder="Chọn vai trò"
+            options={[
+              {
+                value: 1,
+                label: "Quản lý",
+              },
+              {
+                value: 2,
+                label: "Nhân viên",
+              },
+              {
+                value: 3,
+                label: "Người dùng",
+              },
+            ]}
+          />
         </Form.Item>
 
         <Form.Item label="Ảnh" name="avatar">

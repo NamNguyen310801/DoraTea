@@ -50,7 +50,7 @@ export default function UserList() {
     name: "",
     email: "",
     phone: "",
-    isAdmin: "",
+    role: 3,
     address: "",
     avatar: "",
   };
@@ -242,23 +242,36 @@ export default function UserList() {
     },
     {
       title: "Vai trò",
-      dataIndex: "isAdmin",
-      render: (row) => <p>{row ? "Quản lý" : "Người dùng"}</p>,
+      dataIndex: "role",
+      render: (row) => (
+        <p>
+          {(row === 1 && "Quản lý") ||
+            (row === 2 && "Nhân viên") ||
+            (row === 3 && "Người dùng")}
+        </p>
+      ),
       filters: [
         {
-          text: "Người dùng",
-          value: false,
+          text: "Quản lý",
+          value: 1,
         },
         {
-          text: "Quản lý",
-          value: true,
+          text: "Nhân viên",
+          value: 2,
+        },
+        {
+          text: "Người dùng",
+          value: 3,
         },
       ],
       onFilter: (value, record) => {
-        if (value === true) {
-          return record?.isAdmin === true;
+        if (value === 1) {
+          return record?.role === 1;
         }
-        return record?.isAdmin === false;
+        if (value === 2) {
+          return record?.role === 2;
+        }
+        return record?.role === 3;
       },
       width: "10%",
     },
@@ -299,7 +312,7 @@ export default function UserList() {
       name: editData?.name,
       email: editData?.email,
       phone: editData?.phone,
-      isAdmin: editData?.isAdmin.toString(),
+      role: editData?.role,
       address: editData?.address,
       avatar: editData?.avatar,
     });
@@ -314,7 +327,7 @@ export default function UserList() {
       name: row?.name,
       email: row?.email,
       phone: row?.phone,
-      isAdmin: row?.isAdmin,
+      role: row?.role,
       address: row?.address,
       avatar: row?.avatar,
     });
@@ -461,7 +474,7 @@ export default function UserList() {
           </Form.Item>
           <Form.Item
             label="Vai trò"
-            name="isAdmin"
+            name="role"
             rules={[
               {
                 required: true,
@@ -470,15 +483,22 @@ export default function UserList() {
             ]}
             hasFeedback>
             <Select
-              onChange={(value) =>
-                setEditData((prev) => ({
-                  ...prev,
-                  isAdmin: JSON.parse(value),
-                }))
-              }>
-              <Select.Option value="true">Quản lý</Select.Option>
-              <Select.Option value="false">Người dùng</Select.Option>
-            </Select>
+              placeholder="Chọn vai trò"
+              options={[
+                {
+                  value: 1,
+                  label: "Quản lý",
+                },
+                {
+                  value: 2,
+                  label: "Nhân viên",
+                },
+                {
+                  value: 3,
+                  label: "Người dùng",
+                },
+              ]}
+            />
           </Form.Item>
           <Form.Item className="flex" label="Ảnh" name="image">
             <Space>

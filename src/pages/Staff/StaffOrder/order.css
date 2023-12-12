@@ -1,0 +1,66 @@
+.newUser .ant-image .ant-image-mask {
+  border-radius: 8px;
+}
+
+.newUser
+  :where(.css-dev-only-do-not-override-fpg3f5).ant-select-single:not(
+    .ant-select-customize-input
+  )
+  .ant-select-selector {
+  height: 40px;
+  padding: 4px 11px;
+}
+
+/* User table */
+
+.orderList .ant-image {
+  border-radius: 9999px;
+  overflow: hidden;
+  object-fit: contain;
+  width: 60px;
+  height: 60px;
+}
+.orderList .ant-table.ant-table-bordered {
+  background: #cad4bc !important;
+  border: 3px solid #cdcdce;
+}
+.orderList .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #a0913f !important;
+  color: #fff;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+}
+.orderList .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+
+.orderList .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.orderList .ant-table-tbody > tr > td {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(55 65 81);
+}
+.orderList .ant-table-column-sort {
+  background: transparent;
+}
+.orderList .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: rgb(150, 185, 158) !important;
+}
+.ant-form-item-control-input-content {
+  display: flex;
+  align-items: center;
+}
+
+.orderList .ant-float-btn-primary .ant-float-btn-body {
+  background-color: rgb(84, 109, 219);
+  border: none;
+}
+.orderList .ant-float-btn-default .ant-float-btn-body {
+  background-color: rgb(69, 158, 59);
+  border: none;
+  color: #fff;
+}

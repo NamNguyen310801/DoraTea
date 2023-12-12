@@ -114,10 +114,17 @@ export default function Header() {
                     }, 300)
                   }
                   className="px-4 py-3 w-36 bg-gray-200/80 xl:text-xl rounded-md absolute top-10 right-0 shadow-md backdrop-blur-md flex flex-col gap-2">
-                  {user?.isAdmin && (
+                  {user?.role === 1 && (
                     <Link
                       className="hover:text-blue-500 text-base text-textColor font-semibold"
                       to={"/admin/home"}>
+                      Trang quản lý
+                    </Link>
+                  )}
+                  {user?.role === 2 && (
+                    <Link
+                      className="hover:text-blue-500 text-base text-textColor font-semibold"
+                      to={"/staff/home"}>
                       Trang quản lý
                     </Link>
                   )}

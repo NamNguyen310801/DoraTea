@@ -13,8 +13,9 @@ export default function UserChart() {
   }, []);
 
   //   Đếm số lượng sản phẩm cho mỗi category và thêm vào mảng productCountArray
-  const userAdmin = userList?.filter((user) => user.isAdmin === true).length;
-  const userUser = userList?.filter((user) => user.isAdmin === false).length;
+  const userAdmin = userList?.filter((user) => user.role === 1).length;
+  const userStaff = userList?.filter((user) => user.role === 2).length;
+  const userUser = userList?.filter((user) => user.role === 3).length;
   console.log(userAdmin, userUser);
   return (
     <div className="flex items-center justify-center flex-col pt-6 w-full rounded-sm border border-gray-200 h-full">
@@ -27,7 +28,7 @@ export default function UserChart() {
             <CChart
               type="doughnut"
               data={{
-                labels: ["Quản lý", "Người dùng"],
+                labels: ["Quản lý", "Nhân viên", "Người dùng"],
                 datasets: [
                   {
                     backgroundColor: [
@@ -36,7 +37,7 @@ export default function UserChart() {
                       "#00D8FF",
                       "#DD1B16",
                     ],
-                    data: [userAdmin, userUser],
+                    data: [userAdmin, userStaff, userUser],
                   },
                 ],
               }}

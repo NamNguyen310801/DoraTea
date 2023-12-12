@@ -17,7 +17,7 @@ import {
 } from "../../../redux/slice/product.slice";
 
 const { TextArea } = Input;
-export default function NewProduct() {
+export default function StaffNewProduct() {
   const categoryList = useSelector((state) => state.category.categoryList);
   const user = useSelector((state) => state.user.user);
 

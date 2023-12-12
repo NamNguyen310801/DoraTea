@@ -1,0 +1,51 @@
+.staffProduct .ant-image {
+  border-radius: 9px;
+  overflow: hidden;
+  object-fit: contain;
+  width: 100px;
+  height: 120px;
+}
+.staffProduct .ant-table.ant-table-bordered {
+  background: rgb(175, 202, 188) !important;
+  border: 3px solid #d1fcd1;
+}
+.staffProduct .ant-table-wrapper .ant-table-thead > tr > th {
+  background: #559c1a !important;
+  color: #fff;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+}
+.staffProduct .ant-dropdown-trigger.ant-table-filter-trigger {
+  color: rgb(255 242 242 / 40%);
+}
+
+.staffProduct .ant-table-wrapper .ant-table-column-sorter {
+  color: rgb(255 242 242 / 40%);
+}
+.staffProduct .ant-table-tbody > tr > td {
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(55 65 81);
+}
+.staffProduct .ant-table-column-sort {
+  background: transparent;
+}
+.staffProduct .ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background: #9bbdbb !important;
+}
+.ant-form-item-control-input-content {
+  display: flex;
+  align-items: center;
+}
+/* refresh */
+.staffProduct .ant-float-btn-primary .ant-float-btn-body {
+  background-color: rgb(84, 109, 219);
+  border: none;
+}
+.staffProduct .ant-float-btn-default .ant-float-btn-body {
+  background-color: rgb(69, 158, 59);
+  border: none;
+  color: #fff;
+}

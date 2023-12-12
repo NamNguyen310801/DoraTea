@@ -13,7 +13,7 @@ const userSlice = createSlice({
         name,
         email,
         access_token,
-        isAdmin = false,
+        role = 3,
         phone = "",
         address = "",
         avatar = "",
@@ -26,7 +26,7 @@ const userSlice = createSlice({
         phone: phone,
         address: address,
         avatar: avatar,
-        isAdmin: isAdmin,
+        role: role,
         access_token: access_token,
         refresh_token: refresh_token,
       };

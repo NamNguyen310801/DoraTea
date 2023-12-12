@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ButtonDelete, ButtonEdit, ExportToExcel } from "../../../components";
 import {
   deletedProductSlice,
@@ -22,7 +22,7 @@ import {
   Upload,
   FloatButton,
 } from "antd";
-import "./product.css";
+import "./staffProduct.css";
 import {
   ExclamationCircleFilled,
   SearchOutlined,
@@ -40,7 +40,7 @@ import { deleteImage } from "../../../service/image.api";
 
 const { TextArea } = Input;
 const { confirm } = Modal;
-export default function ProductList() {
+export default function StaffProduct() {
   const productList = useSelector((state) => state.product.productList);
   const categoryList = useSelector((state) => state.category.categoryList);
 
@@ -340,22 +340,6 @@ export default function ProductList() {
       }, 2000);
     }
   };
-  const deleteManyProduct = async (ids) => {
-    const res = await ProductService.deleteManyProduct(ids, user.access_token);
-    if (res.status === "OK") {
-      handleGetAllProduct();
-      dispatch(setSuccessAlert(res.message));
-      setRowSelectedKeys([]);
-      setTimeout(() => {
-        dispatch(setNullAlert());
-      }, 2000);
-    } else {
-      dispatch(setErrAlert(res.message));
-      setTimeout(() => {
-        dispatch(setNullAlert());
-      }, 2000);
-    }
-  };
   //
   const showDeleteConfirm = (id) => {
     confirm({
@@ -442,30 +426,9 @@ export default function ProductList() {
     productList?.map((product) => {
       return { ...product, key: product._id };
     });
-
-  const [rowSelectedKeys, setRowSelectedKeys] = useState([]);
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      setRowSelectedKeys(selectedRowKeys);
-    },
-  };
-  const handleDeleteAll = () => {
-    confirm({
-      title: "Bạn có chắc chắn muốn xóa không?",
-      icon: <ExclamationCircleFilled />,
-      okText: "Có",
-      okType: "danger",
-      cancelText: "Không",
-      onOk() {
-        deleteManyProduct(rowSelectedKeys);
-      },
-    });
-  };
-
   const buttonRef = useRef(null);
-
   return (
-    <div className="product mt-5 px-4 w-full">
+    <div className="staffProduct mt-5 px-4 w-full">
       <h3 className="text-2xl text-blue-600 text-center font-bold mb-4">
         Danh sách sản phẩm
       </h3>
@@ -480,27 +443,7 @@ export default function ProductList() {
       />
       <FloatButton.BackTop ref={buttonRef.current} />
       <Spin spinning={isLoading} className="z-30">
-        <ExportToExcel data={productList} fileName="danh-sach-san-pham" />
-        {rowSelectedKeys.length > 0 && (
-          <Button
-            style={{
-              marginBottom: 10,
-            }}
-            danger
-            onClick={handleDeleteAll}>
-            Xóa tất cả
-          </Button>
-        )}
-        <Table
-          rowSelection={{
-            type: "checkbox",
-            ...rowSelection,
-          }}
-          dataSource={dataTable}
-          columns={columns}
-          pagination
-          bordered
-        />
+        <Table dataSource={dataTable} columns={columns} pagination bordered />
       </Spin>
       <Modal
         forceRender

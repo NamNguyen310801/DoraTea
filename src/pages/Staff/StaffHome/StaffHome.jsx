@@ -5,11 +5,10 @@ import {
   RecentOrders,
   TransactionChart,
 } from "./components";
-import { OrderAdminDetail } from "../AdminOrder";
+import { OrderStaffDetail } from "../StaffOrder";
 import { setShowOrder } from "../../../redux/slice/loading.slice";
 import { useDispatch } from "react-redux";
-
-export default function AdminHome() {
+export default function StaffHome() {
   const dispatch = useDispatch();
   const handleOnClose = () => {
     dispatch(setShowOrder(false));
@@ -25,7 +24,7 @@ export default function AdminHome() {
         <RecentOrders />
         <PopularProducts />
       </div>
-      <OrderAdminDetail onClose={handleOnClose} />
+      <OrderStaffDetail onClose={handleOnClose} />
     </div>
   );
 }

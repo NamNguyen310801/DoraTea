@@ -15,8 +15,7 @@ import {
   setSuccessAlert,
 } from "../../../redux/slice/alert.slice";
 import { resetUser } from "../../../redux/slice/user.slice";
-
-export default function AdminHeader() {
+export default function StaffHeader() {
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 

@@ -10,6 +10,7 @@ import {
   News,
   ProductDetail,
   SignUp,
+  Staff,
   User,
 } from "./pages";
 import { Alert, NotFound } from "./components";
@@ -242,9 +243,12 @@ function App() {
         <Route path="/forget-password" element={<ForgetPassword />} />
         <Route
           path="/admin/*"
-          element={user && user?.isAdmin ? <Admin /> : <NotFound />}
+          element={user && user?.role === 1 ? <Admin /> : <NotFound />}
         />
-
+        <Route
+          path="/staff/*"
+          element={user && user?.role === 2 ? <Staff /> : <NotFound />}
+        />
         <Route path="/user/*" element={user ? <User /> : <NotFound />} />
         <Route path="/menu/*" element={<Menu />} />
         <Route path="/about/*" element={<About />} />

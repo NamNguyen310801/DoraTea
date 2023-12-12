@@ -24,11 +24,10 @@ import {
   setSuccessAlert,
 } from "../../../redux/slice/alert.slice";
 import { ButtonEdit, ButtonDelete } from "../../../components";
-import "./category.css";
+import "./staffCategory.css";
 
 const { confirm } = Modal;
-
-export default function Category() {
+export default function StaffCategory() {
   const headCategoryList = useSelector(
     (state) => state.category.headCategoryList
   );
@@ -290,7 +289,7 @@ export default function Category() {
               type="button"
               onClick={addCategory}
               className="w-3/4 py-2 rounded-md font-semibold bg-gradient-to-br from-purple-500 to-blue-400 text-gray-900 hover:from-purple-600 hover:to-blue-500 dark:text-white
-               hover:text-white hover:bg-blue-500 cursor-pointer active:scale-95">
+           hover:text-white hover:bg-blue-500 cursor-pointer active:scale-95">
               Thêm
             </button>
 
@@ -312,7 +311,7 @@ export default function Category() {
           </div>
         </div>
       </div>
-      <div className="category mt-5 mx-auto w-full md:w-[80%] xl:w-[75%]">
+      <div className="staffCategory mt-5 mx-auto w-full md:w-[80%] xl:w-[75%]">
         <h3 className="text-xl text-blue-600 text-center font-semibold mb-4">
           Danh sách thể loại{" "}
         </h3>

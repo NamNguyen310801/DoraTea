@@ -17,7 +17,7 @@ import {
   setSuccessAlert,
 } from "../../../redux/slice/alert.slice";
 import { SearchOutlined, SyncOutlined } from "@ant-design/icons";
-import { ButtonEdit, ExportToExcel } from "../../../components";
+import { ButtonEdit } from "../../../components";
 import { convertISOToNewFormat, convertPrice } from "../../../utils/function";
 import { getAllOrderAPI, updateOrderAPI } from "../../../service/order.api";
 import {
@@ -27,9 +27,9 @@ import {
 } from "../../../redux/slice/order.slice";
 import "./order.css";
 import { setShowOrder } from "../../../redux/slice/loading.slice";
-import OrderAdminDetail from "./OrderAdminDetail";
+import OrderStaffDetail from "./OrderStaffDetail";
 
-export default function OrderList() {
+export default function StaffOrder() {
   const searchInput = useRef(null);
   const allOrderList = useSelector((state) => state.order.allOrderList);
 
@@ -450,7 +450,6 @@ export default function OrderList() {
       />
       <FloatButton.BackTop />
       <Spin spinning={isLoading} className="z-30">
-        <ExportToExcel data={dataTable} fileName="danh-sach-don-hang" />
         <Table dataSource={dataTable} columns={columns} pagination bordered />
       </Spin>
       <Modal
@@ -482,7 +481,7 @@ export default function OrderList() {
           </Form.Item>
         </Form>
       </Modal>
-      <OrderAdminDetail onClose={handleOnClose} />
+      <OrderStaffDetail onClose={handleOnClose} />
     </div>
   );
 }
