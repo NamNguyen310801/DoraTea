@@ -11,7 +11,7 @@ export function generateRandomString() {
 //regex pass
 export const getRegexPassword = () => {
   const regex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\(\)\-_=+?><\.\,;:'"])(?=.{8,})/;
   return regex;
 };
 export function getRegexUsername() {

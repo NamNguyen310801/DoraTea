@@ -10,7 +10,7 @@ import {
   FaGooglePlus,
 } from "react-icons/fa";
 import { Logo, FooterImg } from "../../assets";
-
+import { Link } from "react-router-dom";
 export default function Footer() {
   return (
     <footer
@@ -152,27 +152,21 @@ export default function Footer() {
                   id="menu-footer-ve-chung-toi"
                   className="flex flex-col gap-y-2">
                   <li id="menu-item-1319">
-                    <a href="/history/">Giới thiệu về DoraTea</a>
+                    <Link to="/news">Giới thiệu về DoraTea</Link>
                   </li>
                   <li id="menu-item-1320">
-                    <a href="https://tocotocotea.com/nhuongquyen/">
-                      Nhượng quyền
-                    </a>
+                    <Link to="/news">Nhượng quyền</Link>
                   </li>
                   <li id="menu-item-2119">
-                    <a href="http://tocotocotea.com/tin-tuc-khuyen-mai/">
+                    <Link to="/news/tin-tuc-khuyen-mai">
                       Tin tức khuyến mại
-                    </a>
+                    </Link>
                   </li>
                   <li id="menu-item-1865">
-                    <a href="https://tocotocotea.com/quy-dinh-chung/">
-                      Quy định chung
-                    </a>
+                    <Link to="/news">Quy định chung</Link>
                   </li>
                   <li id="menu-item-1866">
-                    <a href="https://tocotocotea.com/chinh-sach/thong-tin-ve-chu-so-huu-website/">
-                      TT liên hệ &amp; ĐKKD
-                    </a>
+                    <Link to="/about">TT liên hệ &amp; ĐKKD</Link>
                   </li>
                 </ul>
               </div>
@@ -188,34 +182,34 @@ export default function Footer() {
                   id="menu-footer-chinh-sach"
                   className="flex flex-col gap-y-2">
                   <li id="menu-item-1313">
-                    <a href="/chinh-sach/dieu-khoan-chinh-sach-thanh-vien-than-thiet-tocotococlub/">
+                    <Link to="/chinh-sach/dieu-khoan-chinh-sach-thanh-vien-than-thiet-tocotococlub/">
                       Chính sách thành viên
-                    </a>
+                    </Link>
                   </li>
                   <li id="menu-item-1314">
-                    <a href="/chinh-sach/quy-dinh-va-hinh-thuc-thanh-toan/">
+                    <Link to="/chinh-sach/quy-dinh-va-hinh-thuc-thanh-toan/">
                       Hình thức thanh toán
-                    </a>
+                    </Link>
                   </li>
                   <li id="menu-item-1315">
-                    <a href="/chinh-sach/chinh-sach-van-chuyen-giao-nhan/">
+                    <Link to="/chinh-sach/chinh-sach-van-chuyen-giao-nhan/">
                       Vận chuyển giao nhận
-                    </a>
+                    </Link>
                   </li>
                   <li id="menu-item-1316">
-                    <a href="/chinh-sach/chinh-sach-doi-tra-hang-va-hoan-tien/">
+                    <Link to="/chinh-sach/chinh-sach-doi-tra-hang-va-hoan-tien/">
                       Đổi trả và hoàn tiền
-                    </a>
+                    </Link>
                   </li>
                   <li id="menu-item-1317">
-                    <a href="/chinh-sach/chinh-sach-bao-ve-thong-tin-ca-nhan-cua-nguoi-tieu-dung/">
+                    <Link to="/chinh-sach/chinh-sach-bao-ve-thong-tin-ca-nhan-cua-nguoi-tieu-dung/">
                       Bảo vệ thông tin cá nhân
-                    </a>
+                    </Link>
                   </li>
                   <li id="menu-item-1318">
-                    <a href="/chinh-sach/chinh-sach-bao-hanh-bao-tri/">
+                    <Link to="/chinh-sach/chinh-sach-bao-hanh-bao-tri/">
                       Bảo trì, bảo hành
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
