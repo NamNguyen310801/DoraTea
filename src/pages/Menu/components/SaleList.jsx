@@ -10,7 +10,9 @@ export default function SaleList() {
       <div className="flex flex-wrap mt-12 gap-4">
         {textSearch
           ? discountList
-              ?.filter((data) => data?.name?.includes(textSearch))
+              ?.filter((data) =>
+                data?.name?.toLowerCase()?.includes(textSearch?.toLowerCase())
+              )
               ?.map((data) => <ProductCard data={data} key={data?._id} />)
           : discountList?.map((data) => (
               <ProductCard data={data} key={data?._id} />

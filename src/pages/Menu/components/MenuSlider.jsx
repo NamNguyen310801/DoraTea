@@ -54,7 +54,9 @@ export default function MenuSlider() {
         <Slider
           productList={
             textSearch
-              ? popularList?.filter((item) => item?.name?.includes(textSearch))
+              ? popularList?.filter((item) =>
+                  item?.name?.toLowerCase()?.includes(textSearch?.toLowerCase())
+                )
               : popularList
           }
         />
@@ -71,7 +73,9 @@ export default function MenuSlider() {
         <Slider
           productList={
             textSearch
-              ? discountList?.filter((item) => item?.name?.includes(textSearch))
+              ? discountList?.filter((item) =>
+                  item?.name?.toLowerCase()?.includes(textSearch?.toLowerCase())
+                )
               : discountList
           }
         />

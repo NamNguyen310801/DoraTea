@@ -59,7 +59,11 @@ export default function MenuCategory() {
           <div className="w-full flex items-center gap-x-4 gap-y-6 mb-12 scroll-smooth overflow-x-hidden flex-wrap">
             {filter
               ? productList
-                  ?.filter((item) => item?.name?.includes(textSearch))
+                  ?.filter((item) =>
+                    item?.name
+                      ?.toLowerCase()
+                      ?.includes(textSearch?.toLowerCase())
+                  )
                   ?.filter((product) => product.category === filter)
                   ?.map((product, index) => (
                     <div

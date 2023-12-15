@@ -34,8 +34,6 @@ export default function Checkout() {
   const createOrder = async () => {
     const res = await OrderService.createOrderAPI({
       ...dataOrder,
-      isPaid: true,
-      paidAt: new Date().toISOString(),
     });
     if (res.status === "OK") {
       dispatch(setSuccessAlert(res.message));
@@ -168,7 +166,7 @@ export default function Checkout() {
                 <div className="text-sm text-black w-full flex flex-col">
                   <div className="w-full">Nội dung chuyển khoản</div>
                   <div className="font-semibold w-full flex flex-col">
-                    {/* <div>MDH: 0546871324567</div> */}
+                    <div>MDH: Đơn hàng của bạn</div>
                     <div>Tên: {dataOrder?.fullName || ""}</div>
                     <div>SĐT: {dataOrder?.phone || ""}</div>
                   </div>
