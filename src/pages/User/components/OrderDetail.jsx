@@ -194,7 +194,7 @@ export default function OrderDetail() {
               <div onClick={() => navigate("/")}>
                 <button
                   className={`font-normal text-sm min-w-[150px] min-h-[40px] px-5 py-2 capitalize rounded-md text-ellipsis overflow-hidden outline-none w-[220px] border hover:bg-blue-300`}>
-                  Trang trủ
+                  Trang chủ
                 </button>
               </div>
             )}
