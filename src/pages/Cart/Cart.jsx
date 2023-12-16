@@ -16,12 +16,14 @@ export default function Cart() {
         return (
           total +
           Math.round(
-            (item?.product?.price -
-              item?.product?.price * (item?.product?.discount || 0) * 0.01) /
+            (Number(item?.product?.price) -
+              Number(item?.product?.price) *
+                (Number(item?.product?.discount) || 0) *
+                0.01) /
               1000
           ) *
             1000 *
-            item?.quantity
+            Number(item?.quantity)
         );
       }, 0);
       dispatch(setTotalPrice(total));

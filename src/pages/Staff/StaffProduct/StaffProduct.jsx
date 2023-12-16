@@ -362,6 +362,7 @@ export default function StaffProduct() {
     price: "",
     discount: "",
     rating: "",
+    selled: 0,
   };
   const [editData, setEditData] = useState(defaultEditData);
   const [idEdit, setIdEdit] = useState("");
@@ -373,6 +374,7 @@ export default function StaffProduct() {
       price: editData?.price,
       discount: editData?.discount,
       rating: editData?.rating,
+      selled: editData?.selled,
     });
   }, [editData, form]);
   const handleValuesChange = (changedValues, allValues) => {
@@ -389,6 +391,7 @@ export default function StaffProduct() {
       price: row?.price,
       discount: row?.discount,
       rating: row?.rating,
+      selled: row?.selled,
     });
   };
   const onCancel = () => {
@@ -401,7 +404,6 @@ export default function StaffProduct() {
   const onOk = () => {
     editProduct(idEdit, editData);
   };
-
   //Upload
   const [fileList, setFileList] = useState([]);
   const handleOnchangeImage = async ({ file, fileList: newFileList }) => {

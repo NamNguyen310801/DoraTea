@@ -15,7 +15,7 @@ export default function PopularList() {
       dispatch(setLoadingPopular(true));
       getPopularList();
     }
-  }, []);
+  }, [popularList]);
   const getPopularList = async () => {
     const res = await getPopularProduct();
     if (res.status === "OK") {

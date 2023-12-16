@@ -28,7 +28,7 @@ export default function NewProduct() {
     name: "",
     image: "",
     category: "",
-    price: "",
+    price: 0,
     rating: 0,
     description: "",
     discount: 0,
