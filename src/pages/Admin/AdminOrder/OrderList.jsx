@@ -39,7 +39,6 @@ export default function OrderList() {
 
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
   const defaultData = {
     deliveredAt: null,
     isCancelled: false,

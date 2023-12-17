@@ -25,7 +25,6 @@ export default function ProductDetail() {
   const navigate = useNavigate();
   const location = useLocation();
   const { id } = useParams();
-  console.log(id);
   useEffect(() => {
     handleGetDetailProduct(id);
   }, [id]);

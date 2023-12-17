@@ -36,6 +36,8 @@ export default function OrderDetail() {
   const navigate = useNavigate();
   const [orderDetail, setDetail] = useState(null);
   const orderItems = useSelector((state) => state.order.orderItems);
+  const productList = useSelector((state) => state.product.productList);
+  const [itemsOrder, setItemsOrder] = useState(null);
 
   useEffect(() => {
     if (id) {
@@ -43,6 +45,24 @@ export default function OrderDetail() {
       setDetail(order);
     }
   }, [id]);
+  useEffect(() => {
+    setItemsOrder(
+      orderDetail?.orderItems?.map((item) => {
+        let productOrders = productList?.find(
+          (product) => product?._id === item?.product
+        );
+        return {
+          _id: productOrders?._id,
+          name: productOrders?.name,
+          category: productOrders?.category,
+          image: productOrders?.image,
+          price: productOrders?.price,
+          discount: productOrders?.discount,
+          quantity: item?.quantity,
+        };
+      })
+    );
+  }, [orderDetail?.orderItems]);
   const handleCancel = async () => {
     const res = await cancelOrderAPI(orderDetail?._id);
     if (res.status === "OK") {
@@ -236,7 +256,7 @@ export default function OrderDetail() {
                   </div>
                 </div>
                 <div className="border-b" />
-                {orderDetail?.orderItems.map((item) => (
+                {itemsOrder?.map((item) => (
                   <OrderDetailItem item={item} key={item?._id} />
                 ))}
               </div>
@@ -312,15 +332,17 @@ export default function OrderDetail() {
           <Form.Item
             style={{
               display: "flex",
+              width: "100%",
             }}>
-            <Image width={40} src={productRate?.image} />
+            <Image width={80} src={productRate?.image} />
             <Typography.Text
               style={{
                 fontSize: 16,
                 fontWeight: 600,
                 marginLeft: "8px",
+                minWidth: 100,
               }}>
-              Trà sữa Socola
+              {productRate?.name}
             </Typography.Text>
           </Form.Item>
           <Form.Item name="rating" label="Đánh giá">

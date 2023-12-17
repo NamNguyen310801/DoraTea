@@ -15,13 +15,33 @@ const { confirm } = Modal;
 export default function OrderItem({ data }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const productList = useSelector((state) => state.product.productList);
   const orderItems = useSelector((state) => state.order.orderItems);
 
   const [editOrder, setEditOrder] = useState(null);
+  const [itemsOrder, setItemsOrder] = useState(null);
+
   useEffect(() => {
     setEditOrder(data);
   }, [data]);
-
+  useEffect(() => {
+    setItemsOrder(
+      data?.orderItems?.map((item) => {
+        let productOrders = productList?.find(
+          (product) => product?._id === item?.product
+        );
+        return {
+          _id: productOrders?._id,
+          name: productOrders?.name,
+          category: productOrders?.category,
+          image: productOrders?.image,
+          price: productOrders?.price,
+          discount: productOrders?.discount,
+          quantity: item?.quantity,
+        };
+      })
+    );
+  }, [data?.orderItems]);
   const handleSuccess = async () => {
     const res = await successOrderAPI(editOrder?._id);
     if (res.status === "OK") {
@@ -92,15 +112,15 @@ export default function OrderItem({ data }) {
               : "Chờ xác nhận"}
           </div>
         </div>
-        {data?.orderItems?.map((item) => (
+        {itemsOrder?.map((item) => (
           <Link
             key={item?._id}
-            to={`/product/${item?.product?._id}`}
+            to={`/product/${item?._id}`}
             className="border-t flex cursor-pointer w-full">
             <div className="flex w-full break-words flex-wrap items-center pt-3 text-gray-800 justify-between">
               <div className="flex justify-center gap-x-2">
                 <img
-                  src={item?.product?.image}
+                  src={item?.image}
                   className="w-20 h-20 bg-contain bg-center rounded "
                   alt=""
                 />
@@ -108,11 +128,11 @@ export default function OrderItem({ data }) {
                   className="flex flex-1 items-start flex-col break-words pl-3 min-w-0 gap-y-2
             ">
                   <div className="overflow-hidden text-ellipsis line-clamp-2 text-base flex items-center">
-                    <span className="text-gray-700">{item?.product?.name}</span>
+                    <span className="text-gray-700">{item?.name}</span>
                   </div>
                   <div className="flex flex-col gap-y-2">
                     <div className="text-gray-400 text-sm">
-                      Phân loại hàng: {item?.product?.category}
+                      Phân loại hàng: {item?.category}
                     </div>
                     <div className="text-base text-gray-600">
                       x {item?.quantity}
@@ -122,18 +142,15 @@ export default function OrderItem({ data }) {
               </div>
               <div className="flex items-center  text-right px-4 ">
                 <div className="flex items-center gap-x-4 ">
-                  {Boolean(item?.product?.discount) && (
+                  {Boolean(item?.discount) && (
                     <span className="text-gray-400 line-through">
-                      {convertPrice(item?.product?.price * item?.quantity)}
+                      {convertPrice(item?.price * item?.quantity)}
                     </span>
                   )}
                   <span className="text-red-600 font-semibold">
                     {convertPrice(
                       Math.round(
-                        (item?.product?.price -
-                          item?.product?.price *
-                            item?.product?.discount *
-                            0.01) /
+                        (item?.price - item?.price * item?.discount * 0.01) /
                           1000
                       ) *
                         1000 *
