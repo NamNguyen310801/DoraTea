@@ -20,7 +20,10 @@ import { cancelOrderAPI } from "../../../service/order.api";
 import OrderDetailItem from "./OrderDetailItem";
 import { setShowRateModal } from "../../../redux/slice/loading.slice";
 import { setProductRate } from "../../../redux/slice/product.slice";
-import { createReviewAPI } from "../../../service/product.api";
+import {
+  createReviewAPI,
+  updateProductRatingAPI,
+} from "../../../service/product.api";
 import {
   setErrAlert,
   setNullAlert,
@@ -86,6 +89,7 @@ export default function OrderDetail() {
       setTimeout(() => {
         dispatch(setNullAlert());
       }, 1000);
+      await updateProductRatingAPI(data);
     } else {
       dispatch(setErrAlert("Cập nhật thất bại"));
       setTimeout(() => {

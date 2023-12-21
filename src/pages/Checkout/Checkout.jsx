@@ -9,7 +9,6 @@ import {
   setErrAlert,
   setNullAlert,
   setSuccessAlert,
-  setWarningAlert,
 } from "../../redux/slice/alert.slice";
 import { deleteManyCartItemAPI } from "../../service/cart.api";
 import { setCartList } from "../../redux/slice/cart.slice";
@@ -23,7 +22,6 @@ export default function Checkout() {
   const cartList = useSelector((state) => state.cart.cartList);
   const selectedOrder = useSelector((state) => state.order.selectedOrder);
   const ids = selectedOrder?.map((item) => item?._id);
-  console.log(orderCheckout);
   const [isATM, setIsATM] = useState(false);
   const [isQR, setIsQR] = useState(false);
   const [dataOrder, setDataOrder] = useState(null);

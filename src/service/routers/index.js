@@ -26,6 +26,7 @@ export const deleteProductURL = `${url}/product/delete`;
 export const deleteManyProductURL = `${url}/product/delete-many`;
 export const getDetailProductURL = `${url}/product/get-details`;
 export const createReviewURL = `${url}/product/create-review`;
+export const updateProductRatingURL = `${url}/product/updateProduct-rating`;
 
 // Category
 export const createCategoryURL = `${url}/category/create`;

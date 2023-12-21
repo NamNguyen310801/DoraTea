@@ -84,6 +84,8 @@ export default function ProductDetail({ data, onClose }) {
             ...cartItemSlice,
             _id: res?.data?._id,
             quantity: cartItem?.quantity,
+            // description:cartItem?.description,
+            // sizeFee:cartItem?.sizeFee,
           })
         );
       } else {
@@ -95,7 +97,6 @@ export default function ProductDetail({ data, onClose }) {
       }, 2000);
     }
   };
-
   return (
     <div
       id="productDetail"
@@ -190,6 +191,77 @@ export default function ProductDetail({ data, onClose }) {
                     }
                     value={cartItem?.quantity || 1}
                   />
+                </div>
+              </section>
+              <section className="flex justify-between mt-4">
+                <div className="flex flex-col gap-y-4">
+                  <div className=" gap-x-4 mt-1 flex flex-col">
+                    <h5 className="text-sm font-medium text-gray-900">Đường</h5>
+                    <div className="flex gap-x-4 text-sm">
+                      <div className="flex items-center gap-x-2">
+                        <input
+                          type="radio"
+                          id="sugar"
+                          name="sugar"
+                          value="Không Đường"
+                        />
+                        <label htmlFor="sugar"> Không</label>
+                      </div>
+                      <div className="flex items-center gap-x-2">
+                        <input
+                          type="radio"
+                          id="sugar"
+                          name="sugar"
+                          value="50% Đường"
+                        />
+                        <label htmlFor="sugar"> 50%</label>
+                      </div>
+                      <div className="flex items-center gap-x-2">
+                        <input
+                          type="radio"
+                          id="sugar"
+                          name="sugar"
+                          value="75% Đường"
+                        />
+                        <label htmlFor="sugar"> 75%</label>
+                      </div>
+                      <div className="flex items-center gap-x-2">
+                        <input
+                          type="radio"
+                          id="sugar"
+                          name="sugar"
+                          value="100% Đường"
+                        />
+                        <label htmlFor="sugar"> 100%</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div className=" gap-x-4 mt-1 flex flex-col">
+                    <h5 className="text-sm font-medium text-gray-900">Đá</h5>
+                    <div className="flex gap-x-4 text-sm">
+                      <div className="flex items-center gap-x-2">
+                        <input
+                          type="radio"
+                          id="da"
+                          name="da"
+                          value="Không Đá"
+                        />
+                        <label htmlFor="da"> Không</label>
+                      </div>
+                      <div className="flex items-center gap-x-2">
+                        <input type="radio" id="da" name="da" value="50% Đá" />
+                        <label htmlFor="da"> 50%</label>
+                      </div>
+                      <div className="flex items-center gap-x-2">
+                        <input type="radio" id="da" name="da" value="75% Đá" />
+                        <label htmlFor="da"> 75%</label>
+                      </div>
+                      <div className="flex items-center gap-x-2">
+                        <input type="radio" id="da" name="da" value="100% Đá" />
+                        <label htmlFor="da"> 100%</label>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </section>
               <div className="flex w-full items-center justify-between gap-8">

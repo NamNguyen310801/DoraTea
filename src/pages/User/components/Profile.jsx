@@ -5,7 +5,7 @@ import { Button, Form, Input } from "antd";
 import { getBase64 } from "../../../utils/function";
 import * as UserService from "../../../service/user.api";
 import { getRegexPhoneNumber } from "../../../utils/stringsUtils";
-import { setUser } from "../../../redux/slice/user.slice";
+import { setUser, updateUser } from "../../../redux/slice/user.slice";
 import {
   setErrAlert,
   setNullAlert,
@@ -54,7 +54,15 @@ export default function Profile() {
 
     if (res.status === "OK") {
       dispatch(setSuccessAlert("Cập nhật thành công"));
-      handleGetDetailsUser(user?.id, user?.access_token);
+      dispatch(
+        updateUser({
+          name: data?.name,
+          phone: data?.phone,
+          address: data?.address,
+          avatar: data?.avatar,
+        })
+      );
+      // handleGetDetailsUser(user?.id, user?.access_token);
       setTimeout(() => {
         dispatch(setNullAlert());
       }, 1000);
