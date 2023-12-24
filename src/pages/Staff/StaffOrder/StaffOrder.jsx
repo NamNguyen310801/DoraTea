@@ -349,10 +349,7 @@ export default function StaffOrder() {
       isPaid: row?.paid?.isPaid,
       isSuccessOrder: row?.status?.isDelivered,
       itemsPrice: row?.itemsPrice,
-      orderItems: row?.orderItems?.map((item) => ({
-        quantity: item?.quantity,
-        product: item?.product?._id,
-      })),
+      orderItems: [...row?.orderItems],
       paidAt: row?.paid?.paidAt,
       paymentMethod: row?.paymentMethod,
       fullName: row?.name,
